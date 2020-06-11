@@ -1,0 +1,185 @@
+<!DOCTYPE html><html><head><meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+         <meta content="utf-8" http-equiv="encoding"><style>
+      .markdown-body {
+          box-sizing: border-box;
+          min-width: 200px;
+          max-width: 980px;
+          margin: 0 auto;
+          padding: 45px;
+          border-style: dotted solid;
+      }
+  
+        @media (max-width: 767px) {
+          .markdown-body {
+              padding: 15px;
+          }
+          .sidebar {padding-top: 15px;}
+      }
+  
+      .markdown-body .warning {
+          border-style: solid;
+          background-color: rgba(255,10,0,.05);
+      }
+
+      .markdown-body pre
+      {
+        border-radius: 0.3rem;
+        border: solid 1px #dce6f0;
+      }
+
+      .main {
+        margin-left: 200px; /* Same as the width of the sidenav */
+        padding: 0px 10px;
+      }
+
+      /* The sidebar menu */
+      .sidebar {
+        height: 100%; /* Full-height: remove this if you want "auto" height */
+        width: 200px; /* Set the width of the sidebar */
+        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        background-color: #F2E9E4; 
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 20px;
+        padding-left: 10px;
+        color: #261C16;
+        border: 1px solid #D9D0C7;
+      }
+
+      /* The navigation menu links */
+      .sidebar a {
+        color: #261C16;
+        display: block;
+      }
+
+      /* When you mouse over the navigation links, change their color */
+      .sidebar a:hover {
+        color: #8C8480;
+      }
+
+      </style>
+    <link rel="stylesheet" href="/Book/github-markdown.css"><link rel="stylesheet" href="/Book/github.css"></head></html><div class="sidebar">
+            <h3 id="home"><a href="/Book/">Home</a></h3>
+<h3 id="introduction">Introduction</h3>
+<ul>
+<li><a href="/Book/01-introduction/introduction.md.html">About this book</a></li>
+<li><a href="/Book/01-introduction/README.md.html">Checking your local environment</a></li>
+</ul>
+<h3 id="engineering-basics">Engineering Basics</h3>
+<ul>
+<li><a href="/Book/02-basics/basicskills.md.html">Basic Skills</a></li>
+<li><a href="/Book/02-basics/Shells.md.html">Resources</a></li>
+</ul>
+<h3 id="computing-environments">Computing Environments</h3>
+<ul>
+<li><a href="/Book/03-environments/00-environments.md.html">Provisioning</a></li>
+<li><a href="/Book/03-environments/Environments.md.html">A philosophy: Be able to throw away your machine and still code</a></li>
+<li><a href="/Book/03-environments/README.md.html">REST Refresher</a></li>
+</ul>
+
+            </div><div class="main"><article class="markdown-body"><h1 id="provison-workshop">Provison Workshop</h1>
+<p>You must get into pairs.  And there is a <em>twist</em>.</p>
+<h3 id="before-you-start">Before you start</h3>
+<p><code>git clone https://github.com/CSC-DevOps/Provision</code></p>
+<h5 id="using-package-manager-install-dependencies">Using package manager, install dependencies</h5>
+<p><code>cd Provision</code> then <code>npm install</code></p>
+<h5 id="set-your-token">Set your token</h5>
+<pre><code># Mac/Linux
+export NCSU_DOTOKEN=&quot;xxx&quot;
+# Windows
+setx NCSU_DOTOKEN xxx</code></pre>
+<h5 id="run-the-node-program">Run the node program</h5>
+<p><code>node index.js</code></p>
+<p>If everything is set correctly, you should see output like the following:</p>
+<pre><code>Your token is: xxxxxx
+Calls remaining 4931</code></pre>
+<h2 id="rest-refresher">REST Refresher</h2>
+<p>A very brief overview on REST APIs:</p>
+<p>A <em>RESTful architecture</em>, is an architectural style (<a href="https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm">Fielding</a>) for providing resources to clients using a set of request verbs and resource locations. A REST API allows a client to access resources provided by a service.</p>
+<p>A useful <a href="https://raw.githubusercontent.com/CSC-510/REST">workshop on using the GitHub REST APIs</a> can be done for more practice.</p>
+<h3 id="concepts">Concepts</h3>
+<p>The goal of REST APIs is to provide painless communication and interoperability between applications and services. REST APIs typically allow (often with some sort of authentication) a manipulation of the various types of entities associated with a service.</p>
+<p>For example, if an API was created to enable an application to get information about user accounts, create new ones, update them, or delete them, the REST API could simply be defined by combining the following HTTP VERBS (GET, POST, PUT, DELETE), with resource paths, such as /users/.</p>
+<table>
+<thead>
+<tr>
+<th>HTTP Verb</th>
+<th>Action</th>
+<th>Example</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td>Retrieve record(s)</td>
+<td>GET /users/</td>
+<td>Retrieves all users</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>Create record</td>
+<td>POST /users/</td>
+<td>Creates a new user</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>Update record</td>
+<td>PUT /users/6</td>
+<td>Updates user 6</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>Delete record(s)</td>
+<td>DELETE /users/1</td>
+<td>Deletes user with id 1</td>
+</tr>
+</tbody></table>
+<p>Query parameters can be provided to provide additional information to the request. For example, <code>GET /users?country=France</code> would return a list of all users in France.</p>
+<p>A <a href="https://www.tutorialspoint.com/http/http_message_examples.htm">response</a> typically is composed of several parts: including headers, status code, and body.</p>
+<p>Headers will may useful information, such as rate-limits quotas, or properties of the response, such as whether it is encoded or compressed in a particular format.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes">status code</a> will allow you to verify the success of an operation or indicate different types of failures. Additional error information may be sent via the request body.</p>
+<p>The body will typically contain a JSON-formated object or an array. Some actions, such as deleting an object, may not return any data in the response body.</p>
+<p>When sending a request, a JSON-formatted object is sent attached via the request body to the server.</p>
+<h3 id="http">HTTP</h3>
+<p><img src="https://github.com/CSC-510/REST/blob/master/img/http.png?raw=true" alt="http"></p>
+<h2 id="practicting-with-a-rest-client">Practicting with a REST Client</h2>
+<p>Let&apos;s see how a javascript client application can communicate with a server using a REST API call.</p>
+<h3 id="sending-a-get-request-from-inside-the-browser">Sending a GET request from inside the browser</h3>
+<p>In a browser, visit <a href="http://httpbin.org/">http://httpbin.org/</a></p>
+<p>Open the developer&apos;s tool console (in your Web browser) and execute this code inside of the console.</p>
+<p><em>Note:</em> If you try this same code from a different page, you&apos;ll get a Cross-Origin Resource Sharing (CORS) error.</p>
+<pre><code class="language-Javascript">fetch(<span class="hljs-string">&quot;https://httpbin.org/anything&quot;</span>)
+    .then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> data.json())
+    .then(<span class="hljs-function"><span class="hljs-params">result</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(result));</code></pre>
+<p>This constructs as simple <code>GET</code> request to <code>https://httpbin.org/anything</code> and returns a copy of what was sent.</p>
+<h3 id="sending-request-using-curl">Sending request using curl</h3>
+<p>Here are the same examples as above, but written to work with curl:</p>
+<pre><code class="language-bash">curl --request GET https://httpbin.org/anything</code></pre>
+<pre><code class="language-bash">curl --request PUT -H &quot;Content-Type: application/json&quot; --data &apos;{&quot;coffee&quot;:1,&quot;milk&quot;:1,&quot;sugar&quot;:1,&quot;chocolate&quot;:1}&apos; https://httpbin.org/anything</code></pre>
+<h2 id="workshop">Workshop</h2>
+<p>You will be experimenting with code for provisioning a new server from a cloud provider at a particular region, that is initialized with a specified virtual machine image, using the <a href="https://developers.digitalocean.com/v2/">digitalocean api v2</a>.</p>
+<p>The code makes use of the <a href="https://github.com/sindresorhus/got#readme">got api</a> for making http requests, suitable for interacting with a REST API.</p>
+<p>Complete the remaining 7 steps specified in the code comments of <a href="index.js"><code>index.js</code></a>.</p>
+<ol>
+<li>List regions.</li>
+<li>List VM images.</li>
+<li>Create droplet.</li>
+<li>Get droplet ip</li>
+<li>Ping ip</li>
+<li>Destroy droplet</li>
+<li>Ping ip, make sure dead.</li>
+</ol>
+<p>You can use <code>curl</code> to help debug your calls:</p>
+<pre><code class="language-bash">curl -X GET -H &apos;Content-Type: application/json&apos; -H &quot;Authorization: Bearer $NCSU_DOTOKEN&quot; &quot;https://api.digitalocean.com/v2/images&quot;</code></pre>
+<p><em>Note: For Windows, use <code>%NCSU_DOTOKEN%</code> in your curl command to expand the environment variable.</em></p>
+<p><strong>Bonus</strong>: The first 3 pairs to finish workshop will receive 1 bonus point on their final workshop/class activities. <em>But</em>, if the rate-limit hits 0, everyone will loose 1 point on their workshop final grade. </p>
+<img src="https://cloud.githubusercontent.com/assets/742934/9525410/ff96de96-4cb1-11e5-84af-19b70cbae957.png" alt="Saw" width="500px;">
+
+
+
+
+
+
+</article></div>
