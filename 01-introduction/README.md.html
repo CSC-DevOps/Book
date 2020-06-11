@@ -13,14 +13,42 @@
           .markdown-body {
               padding: 15px;
           }
+          .sidenav {padding-top: 15px;}
       }
   
       .markdown-body .warning {
           border-style: solid;
           background-color: rgba(255,10,0,.05);
       }
+
+      .main {
+        margin-left: 160px; /* Same as the width of the sidenav */
+        padding: 0px 10px;
+      }
+
+      /* The sidebar menu */
+      .sidenav {
+        height: 100%; /* Full-height: remove this if you want "auto" height */
+        width: 160px; /* Set the width of the sidebar */
+        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        background-color: #111; /* Black */
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 20px;
+      }
+
       </style>
-    <link rel="stylesheet" href="/Book/github-markdown.css"><link rel="stylesheet" href="/Book/github.css"></head></html><article class="markdown-body"><h1 id="opunit">Opunit</h1>
+    <link rel="stylesheet" href="/Book/github-markdown.css"><link rel="stylesheet" href="/Book/github.css"></head></html><div class="sidebar">
+            <h1 id="introduction">Introduction</h1>
+<p><em>History and core concepts of DevOps</em></p>
+<ul>
+<li><a href="introduction.md.html">About this book</a></li>
+<li><a href="README.md.html">Checking your local environment</a></li>
+</ul>
+
+            </div><div class="main"><article class="markdown-body"><h1 id="opunit">Opunit</h1>
 <p><a href="https://github.com/ottomatica/opunit">opunit</a> is a simple tool for verifying the configuration of a machine, including your laptop and or any virtual machines you may have created.</p>
 <h2 id="checking-your-local-environment">Checking your local environment</h2>
 <p>By running opunit, you&apos;ll be able to verify your machine is correctly setup for a course, workshop, or homework assignment. </p>
@@ -36,7 +64,7 @@
 <p>For example, the first check will validate whether the version of node.js satisties the semver requirement of being at least <code>^10.x.x</code> or greater.</p>
 <p>Notice that one of the checks under &quot;Editor Support&quot;, fails to validate. This check looks for syntax highlighting being enabled for vim. This check fails because the .vimrc file is not presence on system.</p>
 <p>If you have any questions about why a check fails or passes on your system, reach out to a TA or instructor.</p>
-<p><img src="https://raw.githubusercontent.com/CSC-DevOps/profile/master//img/profile.png" alt="profile"></p>
+<p><img src="https://raw.githubusercontent.com/CSC-DevOps/profile/master/img/profile.png" alt="profile"></p>
 <h3 id="running-opunit-for-a-workshopassignment">Running opunit for a workshop/assignment</h3>
 <p>You run opunit against a local profile, which is useful when working on an assignment or workshop.</p>
 <p>For example, if you are working on the <a href="https://github.com/CSC-DevOps/Pipelines">Pipelines workshop</a>, you can run opunit against the profile located in test/opunit.yml</p>
@@ -45,4 +73,4 @@
 <h3 id="running-opunit-against-a-virtual-machine">Running opunit against a virtual machine</h3>
 <p>opunit can be run against a virtual machine, both locally on your machine, as well as remote virtual machines created on platforms such as AWS or digital ocean.</p>
 <p>Further instructions will be provided when we get to this step.</p>
-</article>
+</article></div>

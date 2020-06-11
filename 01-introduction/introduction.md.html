@@ -13,14 +13,42 @@
           .markdown-body {
               padding: 15px;
           }
+          .sidenav {padding-top: 15px;}
       }
   
       .markdown-body .warning {
           border-style: solid;
           background-color: rgba(255,10,0,.05);
       }
+
+      .main {
+        margin-left: 160px; /* Same as the width of the sidenav */
+        padding: 0px 10px;
+      }
+
+      /* The sidebar menu */
+      .sidenav {
+        height: 100%; /* Full-height: remove this if you want "auto" height */
+        width: 160px; /* Set the width of the sidebar */
+        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        background-color: #111; /* Black */
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 20px;
+      }
+
       </style>
-    <link rel="stylesheet" href="/Book/github-markdown.css"><link rel="stylesheet" href="/Book/github.css"></head></html><article class="markdown-body"><h1 id="introduction">Introduction</h1>
+    <link rel="stylesheet" href="/Book/github-markdown.css"><link rel="stylesheet" href="/Book/github.css"></head></html><div class="sidebar">
+            <h1 id="introduction">Introduction</h1>
+<p><em>History and core concepts of DevOps</em></p>
+<ul>
+<li><a href="introduction.md.html">About this book</a></li>
+<li><a href="README.md.html">Checking your local environment</a></li>
+</ul>
+
+            </div><div class="main"><article class="markdown-body"><h1 id="introduction">Introduction</h1>
 <p>Hook. Hacker news story (delete the production database).</p>
 <p>Or story about deleting reading data from Mac.</p>
 <h2 id="about-this-book">About this book</h2>
@@ -37,4 +65,4 @@
 <h2 id></h2>
 <h2 id="other-books-and-resources">Other Books and Resources</h2>
 <p>Modern software development organizations require entire teams of DevOps to automate and maintain software engineering processes and infrastructure vital to the organization. In this course, you will gain practical exposure to the skills, tools, and knowledge needed in automating software engineering processes and infrastructure. Students will have the chance to build new or extend existing software engineering tools and design a DevOps pipeline.</p>
-</article>
+</article></div>
