@@ -1,0 +1,145 @@
+<!DOCTYPE html><html><head><meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+         <meta content="utf-8" http-equiv="encoding"><style>
+      .markdown-body {
+          box-sizing: border-box;
+          min-width: 200px;
+          max-width: 980px;
+          margin: 0 auto;
+          padding: 45px;
+          border-style: dotted solid;
+      }
+  
+        @media (max-width: 767px) {
+          .markdown-body {
+              padding: 15px;
+          }
+          .sidebar {padding-top: 15px;}
+      }
+  
+      .markdown-body .warning {
+          border-style: solid;
+          background-color: rgba(255,10,0,.05);
+      }
+
+      .markdown-body pre
+      {
+        border-radius: 0.3rem;
+        border: solid 1px #dce6f0;
+      }
+
+      .main {
+        margin-left: 200px; /* Same as the width of the sidenav */
+        padding: 0px 10px;
+      }
+
+      /* The sidebar menu */
+      .sidebar {
+        height: 100%; /* Full-height: remove this if you want "auto" height */
+        width: 200px; /* Set the width of the sidebar */
+        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        background-color: #F2E9E4; 
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 20px;
+        padding-left: 10px;
+        color: #261C16;
+        border: 1px solid #D9D0C7;
+      }
+
+      /* The navigation menu links */
+      .sidebar a {
+        color: #261C16;
+        display: block;
+      }
+
+      /* When you mouse over the navigation links, change their color */
+      .sidebar a:hover {
+        color: #8C8480;
+      }
+
+      </style>
+    <link rel="stylesheet" href="/Book/github-markdown.css"><link rel="stylesheet" href="/Book/github.css"></head></html><div class="sidebar">
+            <h3 id="home"><a href="/Book/">Home</a></h3>
+<h3 id="introduction">Introduction</h3>
+<ul>
+<li><a href="/Book/01-introduction/introduction.html">About this book</a></li>
+<li><a href="/Book/01-introduction/concepts.html">Motivation</a></li>
+<li><a href="/Book/01-introduction/README.html">Checking your local environment</a></li>
+</ul>
+<h3 id="engineering-basics">Engineering Basics</h3>
+<ul>
+<li><a href="/Book/02-basics/basicskills.html">Basic Skills</a></li>
+<li><a href="/Book/02-basics/Shells.html">Resources</a></li>
+</ul>
+<h3 id="computing-environments">Computing Environments</h3>
+<ul>
+<li><a href="/Book/03-environments/00-environments.html">Provisioning</a></li>
+<li><a href="/Book/03-environments/Environments.html">A philosophy: Be able to throw away your machine and still code</a></li>
+<li><a href="/Book/03-environments/README.html">REST Refresher</a></li>
+</ul>
+
+            </div><div class="main"><article class="markdown-body"><p><a href="Setup.md#setup">Setup</a> | <a href="Shells.md#shells">Shells</a> |  <a href="Git.md#git">Git</a> | <a href="MarkdownEditors.md#markdown">Markdown and IDEs</a> |  <a href="Environments.md#environments">Virtual Environments</a> | <a href="OnlineTools.md#online-tools">Task Management</a></p>
+<h1 id="computing-environments">Computing Environments</h1>
+<p>Creating computing and development environments will be an essential skill for software engineering. Unfortunately, consistently getting software installed on a your computer and correctly setting up the environments can take away weeks of your productive time.</p>
+<p>Virtual machines/containers can provide a useful solution for automating the creation and management of your computing environment and development workflow. Unfortunately, when developers think about virtual machines, a common idea that comes to mind is a dedicated heavy-weight virtualized system with a full graphics Desktop. Alternatively, you may think of dual-booted systems. While these types of systems can be useful, the goal of this workshop is to introduce you to a different concept for software development.</p>
+<h2 id="a-philosophy-be-able-to-throw-away-your-machine-and-still-code">A philosophy: Be able to throw away your machine and still code</h2>
+<blockquote>
+<p>Code that only runs on your machine is useful to no one else</p>
+</blockquote>
+<p>With computing environments, we are able to automate the specification of our environment for running our code, which makes it easier for us to recreate and share our computing environments with others on a new machine.</p>
+<p>To use a computing environment, you can use your host operating system to write code, interact with the running program, and visualize its executions. But you avoid execution code on your own machine itself---that all happens inside the computing environment.</p>
+<blockquote>
+<p>Computing environments are for running code, not writing code.</p>
+</blockquote>
+<p>To accomplish this, we use a set of tools to enable you to map files and program between your host environment and computing environment. </p>
+<h2 id="creating-a-virtual-machine">Creating a Virtual Machine</h2>
+<p><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a> is a lightweight virtualization provider. It is very effective for creating <em>headless</em> virtual machines that run without any GUI/Desktop interface.</p>
+<p>Install VirtualBox.</p>
+<blockquote>
+<p>Windows: If you&apos;re running Hyper-V and VirtualBox, and you&apos;re experiencing crashes when you try to start a VM, you may need to <a href="https://superuser.com/questions/540055/convenient-way-to-enable-disable-hyper-v-in-windows-8">turn off Hyper-V</a> (which exclusively locks use of CPU for virtualization).</p>
+</blockquote>
+<blockquote>
+<p>Linux: If you run <code>vboxmanage list vms</code> command and you get <code>WARNING: The vboxdrv kernel module is not loaded...</code> error, see the dicussion <a href="https://askubuntu.com/a/229908">here</a> for how to fix it.</p>
+</blockquote>
+<h3 id="ensure-virtualization-is-enabled">Ensure virtualization is enabled</h3>
+<p>To be able to run virtual machines, your machine needs to support virtualization. 
+Ensure virtualization (Intel VT-x or AMD-V) is enabled on your system using the instructions for your operating system:  </p>
+<ul>
+<li><p><strong>Windows:</strong> open Task Manager and go to Performance tab, and you should see virtualization is enabled.</p>
+<img src="https://raw.githubusercontent.com/chrisparnin/EngineeringBasics/master/resources/imgs/win-taskmanager.jpg" data-canonical-src="resources/imgs/win-taskmanager.jpg" width="600">
+</li>
+<li><p><strong>Mac:</strong> run the command below to see the list of supported CPU flags. If you see <strong>VMX</strong>, your machine supports hardware virtualization:  </p>
+<pre><code>sysctl -a | grep machdep.cpu.features | grep VMX</code></pre>
+ <img src="https://raw.githubusercontent.com/chrisparnin/EngineeringBasics/master/resources/imgs/mac-cpu-flags.png" data-canonical-src="resources/imgs/mac-cpu-flags.png" width="600">
+</li>
+<li><p><strong>Linux:</strong> run the command below to see the list of supported CPU flags. If you see <strong>VMX</strong> or <strong>SVM</strong> flag, youre machine supports hardware virtualization:</p>
+<pre><code>grep -E &quot;vmx|svm&quot; /proc/cpuinfo</code></pre>
+ <img src="https://raw.githubusercontent.com/chrisparnin/EngineeringBasics/master/resources/imgs/linux-cpu-flags.png" data-canonical-src="resources/imgs/linux-cpu-flags.png" width="600">
+
+</li>
+</ul>
+<h4 id="manual-creation">Manual creation</h4>
+<p>While it is possible to use the VirtualBox GUI to manually install a virtual machine (and run through the OS installation script); this is not an effective automation approach!</p>
+<h4 id="bakerx">bakerx</h4>
+<h2 id="installations">Installations</h2>
+<pre><code>npm install ottomatica/bakerx -g</code></pre>
+<h2 id="using-bakerx">Using <code>bakerx</code></h2>
+<h3 id="pulling-images">Pulling images</h3>
+<p>First, you need to pull an existing virtual machine image from a registry. Registries are basically the assets in a GitHub repository releases. Then you can pull an image by running the following commands:</p>
+<pre><code>bakerx pull ottomatica/slim#images alpine3.9-simple</code></pre>
+<p>See <a href="https://github.com/ottomatica/slim">slim</a> for instructions on how to create and publish an image. </p>
+<h3 id="creating-vms">Creating VMs</h3>
+<p>After pulling images, you can create VMs that run those images. Simply run the command below:</p>
+<pre><code>bakerx run example_alpine_vm alpine3.9-simple --memory 1024</code></pre>
+<blockquote>
+<p>The <code>--memory | -m</code> flag is optional, and can be used to set the amount of shared memory with your virtual machine.</p>
+</blockquote>
+<h3 id="connecting-to-vms">Connecting to VMs</h3>
+<p>Finally, bakerx will give you an <code>ssh</code> command similar to what is shown below, which you can use to connect to the VM.</p>
+<pre><code>bakerx ssh example_alpine_vm</code></pre>
+<blockquote>
+<p>bakerx uses port forwarding to connect to the VMs, so you need to specify the port, <code>-p</code>, when directly running the ssh command. </p>
+</blockquote>
+</article></div>
