@@ -146,11 +146,11 @@ Calls remaining 4931</code></pre>
 <h3 id="http">HTTP</h3>
 <p><img src="https://github.com/CSC-510/REST/blob/master/img/http.png?raw=true" alt="http"></p>
 <h2 id="practicting-with-a-rest-client">Practicting with a REST Client</h2>
-<p>Let&apos;s see how a javascript client application can communicate with a server using a REST API call.</p>
+<p>Let&#x2019;s see how a javascript client application can communicate with a server using a REST API call.</p>
 <h3 id="sending-a-get-request-from-inside-the-browser">Sending a GET request from inside the browser</h3>
 <p>In a browser, visit <a href="http://httpbin.org/">http://httpbin.org/</a></p>
-<p>Open the developer&apos;s tool console (in your Web browser) and execute this code inside of the console.</p>
-<p><em>Note:</em> If you try this same code from a different page, you&apos;ll get a Cross-Origin Resource Sharing (CORS) error.</p>
+<p>Open the developer&#x2019;s tool console (in your Web browser) and execute this code inside of the console.</p>
+<p><em>Note:</em> If you try this same code from a different page, you&#x2019;ll get a Cross-Origin Resource Sharing (CORS) error.</p>
 <pre><code class="language-Javascript">fetch(<span class="hljs-string">&quot;https://httpbin.org/anything&quot;</span>)
     .then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> data.json())
     .then(<span class="hljs-function"><span class="hljs-params">result</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(result));</code></pre>

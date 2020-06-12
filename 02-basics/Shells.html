@@ -85,8 +85,8 @@
 <p>A shell is a computing environment where commands can be interpreted, evaluated, and its output displayed (i.e., an instance of a read&#x2013;eval&#x2013;print loop (REPL)). A good shell provides access to a rich set of commands and allows simple programming of commands, which can be used to create powerful scripts and tools.</p>
 <p>But with great power comes great <a href="http://www.pgbovine.net/command-line-bullshittery.htm">bullshittery</a>. Commands and their options can be terse, inconsistent, and difficult to learn. A steep learning curve often prevents novices from enjoying the eventual payoff.</p>
 <h2 id="resources">Resources</h2>
-<p>If you&apos;ve hardly used a command line environment before, you might want to go review this more thorough tutorial:
-<a href="http://swcarpentry.github.io/shell-novice/index.html">http://swcarpentry.github.io/shell-novice/index.html</a> ---this page is more of a collection of pointers, discussion of common tasks and mistakes, and resources.</p>
+<p>If you&#x2019;ve hardly used a command line environment before, you might want to go review this more thorough tutorial:
+<a href="http://swcarpentry.github.io/shell-novice/index.html">http://swcarpentry.github.io/shell-novice/index.html</a> &#x2014;this page is more of a collection of pointers, discussion of common tasks and mistakes, and resources.</p>
 <p>You may also want to reference the online book, <a href="https://seankross.com/the-unix-workbench/">the Unix Workbench</a>.</p>
 <h3 id="command-line-fu">Command Line Fu</h3>
 <p>A list of command line examples for interesting tasks:<br><a href="http://www.commandlinefu.com/commands/browse">http://www.commandlinefu.com/commands/browse</a></p>
@@ -97,7 +97,7 @@
 <p><a href="http://explainshell.com/explain?cmd=tar+-zxvf">http://explainshell.com/explain?cmd=tar+-zxvf</a></p>
 <p><img src="https://cloud.githubusercontent.com/assets/742934/15635713/8fc9cf7e-25b4-11e6-957e-0bb03756b9fb.png" alt="image"></p>
 <h3 id="bite-size-command-line-zine">Bite Size Command Line Zine</h3>
-<p>You might find Julia Evan&apos;s zine useful: <a href="https://jvns.ca/blog/2018/08/05/new-zine--bite-size-command-line/">Bite Size Command Line!</a>.</p>
+<p>You might find Julia Evan&#x2019;s zine useful: <a href="https://jvns.ca/blog/2018/08/05/new-zine--bite-size-command-line/">Bite Size Command Line!</a>.</p>
 <p>Here is an example for the <code>lsof</code> command. More examples can be found <a href="https://twitter.com/i/moments/1026078161115729920">here</a>.</p>
 <p><img src="https://pbs.twimg.com/media/DjFb_FPX4AAOwpa?format=jpg&amp;name=medium" alt="lsof"></p>
 <h2 id="shell-basics">Shell Basics</h2>
@@ -137,7 +137,7 @@ command1 || command2  # do command2 only if command1 fails
 command1 &amp;&amp; command2  # do command2 only if command1 succeeds</code></pre>
 <p>Note: In Windows, <code>;</code> does not work in Cmd, but does in Powershell. Use <code>&amp;&amp;</code> for the most portable operation.</p>
 <h5 id="command-io">Command I/O</h5>
-<p>The UNIX shell commands push data from sources through filters along pipes. In a shell there are three sources of I/O: standard input (stdin), standard output (stout), and standard error (sterr). Standard error is a specialized version of standard out, so we&apos;ll focus on standard in and standard out.  The default for standard in is the keyboard and the default for standard out is to print to the shell (or console).</p>
+<p>The UNIX shell commands push data from sources through filters along pipes. In a shell there are three sources of I/O: standard input (stdin), standard output (stout), and standard error (sterr). Standard error is a specialized version of standard out, so we&#x2019;ll focus on standard in and standard out.  The default for standard in is the keyboard and the default for standard out is to print to the shell (or console).</p>
 <p>Pipes and redirects change standard in and standard out from defaults.</p>
 <pre><code class="language-bash">command              # default standard in and standard out
 command &lt; inputFile  # redirect of inputFile contents to command as standard in
@@ -160,7 +160,7 @@ command &amp;            # run in background, typically used for applications</c
 <p>Then enable your new prompt with:</p>
 <pre><code>source .bash_prompt</code></pre>
 <p>Try running a simple command, like <code>ls</code>. Notice the green prompt. Now try running a non-existing command, such as <code>foo</code>. Notice the red prompt.</p>
-<p><strong>Exercise</strong>: Customize your bash prompt. Use a google search, reference <a href="https://www.maketecheasier.com/8-useful-and-interesting-bash-prompts/">articles</a>, or search on GitHub for &quot;dotfiles&quot; as a source for inspiration.</p>
+<p><strong>Exercise</strong>: Customize your bash prompt. Use a google search, reference <a href="https://www.maketecheasier.com/8-useful-and-interesting-bash-prompts/">articles</a>, or search on GitHub for &#x201C;dotfiles&#x201D; as a source for inspiration.</p>
 <h2 id="activity-data-wrangling-with-bash">Activity: Data Wrangling with bash</h2>
 <p>Download data with <code>wget</code>.</p>
 <pre><code class="language-bash"><span class="hljs-literal">wget</span> -nc https://s3-us-west-2.amazonaws.com/producthunt-downloads/ph-export--2016-04-01.<span class="hljs-literal">tar</span>.gz</code></pre>
@@ -170,15 +170,15 @@ command &amp;            # run in background, typically used for applications</c
 <pre><code class="language-bash"><span class="hljs-literal">tar</span> -zxvf ph-export--2016-04-01.<span class="hljs-literal">tar</span>.gz -C product-hunt/
 <span class="hljs-literal">ls</span> product-hunt/</code></pre>
 <p>Data wrangling. </p>
-<p>List the column headers inside the &quot;users.*.csv&quot; file</p>
+<p>List the column headers inside the &#x201C;users.*.csv&#x201D; file</p>
 <pre><code class="language-bash"><span class="hljs-literal">head</span> -n 1 product-hunt/users--2016-04-01_14-36-26-UTC.csv</code></pre>
 <p>Extract a column of text from a file, using <code>cut</code>.</p>
 <pre><code class="language-bash"><span class="hljs-literal">cut</span> -f 2 -d &apos;;&apos; product-hunt/posts*.csv | <span class="hljs-literal">head</span></code></pre>
 <h4 id="exercise">Exercise</h4>
-<p>Using a combination of <code>cut</code>, <code>wc</code>, <code>head</code>, <code>tail</code>, <code>grep</code>, <code>sort</code>, <code>uniq</code>, pipes (<code>|</code>) and any other unix suitable commands, create a command that calculates the following. For each task, save the answers results in a file named, <code>data-a1.txt</code>, <code>data--a2.txt</code>, and so on...</p>
+<p>Using a combination of <code>cut</code>, <code>wc</code>, <code>head</code>, <code>tail</code>, <code>grep</code>, <code>sort</code>, <code>uniq</code>, pipes (<code>|</code>) and any other unix suitable commands, create a command that calculates the following. For each task, save the answers results in a file named, <code>data-a1.txt</code>, <code>data--a2.txt</code>, and so on&#x2026;</p>
 <ul>
-<li>Count the number of columns inside the &quot;users.*.csv&quot; file. [data-a1.txt]</li>
-<li>Count the number of times &quot;bitcoin&quot; is referenced inside a the post&apos;s file &quot;tagline&quot; column. [data-a2.txt]</li>
+<li>Count the number of columns inside the &#x201C;users.*.csv&#x201D; file. [data-a1.txt]</li>
+<li>Count the number of times &#x201C;bitcoin&#x201D; is referenced inside a the post&#x2019;s file &#x201C;tagline&#x201D; column. [data-a2.txt]</li>
 <li>Find the row of post with the highest number of upvotes. [data-a3.txt]</li>
 </ul>
 <p>Verify answers with <code>opunit verify local</code>.</p>
@@ -240,7 +240,7 @@ done</code></pre>
 e=$(command)
 $e
 echo &quot;result is: $e&quot;</code></pre>
-<p><strong>Activity</strong>: Imagine you wanted to write a &quot;dead&quot; startup checker using the product hunt data. Using the script below, you would be able check if a startup&apos;s url was still alive.</p>
+<p><strong>Activity</strong>: Imagine you wanted to write a &#x201C;dead&#x201D; startup checker using the product hunt data. Using the script below, you would be able check if a startup&#x2019;s url was still alive.</p>
 <p>Save this in a file called <code>checker.sh</code>:</p>
 <pre><code class="language-bash">#!/bin/bash
 
@@ -294,7 +294,7 @@ Captain Strike (&#x1F480;): http://www.producthunt.com/l/45fad46fe3f810 =&gt; 40
 <p><strong>Exercise</strong>: Go throught the script line-by-line by a partner. Do you understand what each line is doing?</p>
 <h2 id="weird-but-useful-features-and-commands-in-bash">Weird but useful features and commands in bash</h2>
 <h3 id="heredoc">Heredoc</h3>
-<p>In some situations, you might need to send multi-line content as input to a command or to store as a file. <code>heredoc</code> is an input mechanism that allows you to enter in text (interactively or in a script), until a delimiter string is reached (&apos;END_DOC&apos;). </p>
+<p>In some situations, you might need to send multi-line content as input to a command or to store as a file. <code>heredoc</code> is an input mechanism that allows you to enter in text (interactively or in a script), until a delimiter string is reached (&#x2018;END_DOC&#x2019;). </p>
 <pre><code class="language-bash">cat &lt;&lt; &apos;END_DOC&apos; &gt; .functions
 mostUsed()
 {
@@ -304,7 +304,7 @@ END_DOC</code></pre>
 <p>Load the defined function. Then we can see which command you run the most.</p>
 <pre><code class="language-bash">source .functions
 mostUsed</code></pre>
-<p>Heredoc can also be useful for running command on input you&apos;d like to type in manually or paste from your clipboard and don&apos;t want to bother placing in a file:</p>
+<p>Heredoc can also be useful for running command on input you&#x2019;d like to type in manually or paste from your clipboard and don&#x2019;t want to bother placing in a file:</p>
 <p>Count the number of words and characters in text:</p>
 <pre><code>cat &lt;&lt; EOF | wc
 Lieutenant-General Sir Adrian Paul Ghislain Carton de Wiart (5 May 1880 &#x2013; 5 June 1963), was a British Army officer of Belgian and Irish descent. He fought in the Boer War, World War I, and World War II, was shot in the face, head, stomach, ankle, leg, hip and ear, survived a plane crash, tunneled out of a POW camp, and bit off his own fingers when a doctor wouldn&#x2019;t amputate them. He later said &quot;frankly I had enjoyed the war.&quot;
@@ -319,7 +319,7 @@ EOF</code></pre>
 <!-- Helpful: https://superuser.com/questions/1166920/how-do-i-send-the-stdout-of-a-command-to-an-expect-input -->
 
 <p>Expect the unexpected. If you need to automate a command which could prompt for input, then you can use <code>expect</code> to help respond to that input.</p>
-<p>Just as a simple example, if you ran this code <code>python -c &quot;print( input(&apos;Enter value: &apos;) )&quot;</code>, it will wait around until you typed something, which could be a problem if you&apos;re doing this 1000s of times or run in an automation script.</p>
+<p>Just as a simple example, if you ran this code <code>python -c &quot;print( input(&apos;Enter value: &apos;) )&quot;</code>, it will wait around until you typed something, which could be a problem if you&#x2019;re doing this 1000s of times or run in an automation script.</p>
 <p>By using expect, you can create scripts that automatically response to prompt inputs.</p>
 <pre><code class="language-bash">expect &lt;&lt;- END
     spawn python -c &quot;print( input(&apos;Enter value: &apos;) )&quot;
@@ -331,7 +331,7 @@ END</code></pre>
 <p>Expect is pretty tricky to learn how to use properly, but it is a nice trick to hold on to in case you need it one day.</p>
 <h3 id="traps">Traps</h3>
 <p>Using traps for <a href="http://redsymbol.net/articles/bash-exit-traps/">resource cleanup</a>, or implementing a singleton process.</p>
-<p>Save the following in &apos;server.sh&apos; and make it executable.</p>
+<p>Save the following in &#x2018;server.sh&#x2019; and make it executable.</p>
 <pre><code>#!/bin/bash
 
 LOCKFILE=510-bash.lock
@@ -368,7 +368,7 @@ nc -k -l 5100 | bash</code></pre>
 <p><strong>Persistance</strong>: If you need to change directories, you will need to do it in the same command: <code>cd App/ &amp;&amp; cmd</code>.</p>
 <p>Otherwise, your next command will start back in the same original directory.</p>
 <p>More specifically, ssh can operate in a <code>shell</code>, <code>exec</code>, or <code>subsystem</code> <a href="https://stackoverflow.com/questions/6770206/what-is-the-difference-between-the-shell-channel-and-the-exec-channel-in-jsc">channels</a>. When using a shell channel, you can interactively send commands like a normal shell. A cd operation will persist. </p>
-<p>Because you&apos;re sending commands over ssh, this is done in <code>exec</code> mode. In exec mode, each command will be executed in its own context and lose many of the shell&apos;s functionality.</p>
+<p>Because you&#x2019;re sending commands over ssh, this is done in <code>exec</code> mode. In exec mode, each command will be executed in its own context and lose many of the shell&#x2019;s functionality.</p>
 <p>Finally, you can emulate some parts of a terminal using <code>-t or -tt</code> as well as combining with heredoc to input a multi-line script.</p>
 <h3 id="tmux">tmux</h3>
 <p>When issuing a long running command (package installation, build job), you may find your connection drop, which could result in termination of your command!</p>
