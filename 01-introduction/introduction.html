@@ -92,31 +92,26 @@
             </div><div class="main"><article class="markdown-body"><h1 id="introduction">Introduction</h1>
 <h2 id="about-this-book">About this book</h2>
 <p>Software developers no longer simply build software in isolation: They now are expected to continuously deploy fixes and experimental features to production environments serving millions of customers. Making such ultra-fast and automatic changes to production means that testing and verifying the design and implementation of computing environments is increasingly important. However, based on the 2018 State of DevOps Report<sup class="footnote-ref" id="marked-fnref:report"><a href="#marked-fn:report">[report]</a></sup>, only 36% of participants have capacity for dedicated testing of computing environments in their companies, making environment construction easy to get wrong. For example, GitLab lost 300 GB of customer data after accidentally deleting their production database<sup class="footnote-ref" id="marked-fnref:gitlab"><a href="#marked-fn:gitlab">[gitlab]</a></sup>. Even worse, they could not restore the data because they discovered their backup procedure had been failing due to a mismatch in versions between the dump utility (<code>pg_dump 9.2</code>) and their database (<code>PostgreSQL 9.6</code>).</p>
-
-<p>Unfortunately, the skills required to construct and test these computing environments supporting continuous deployment requires expertise and training that is even more rare and highly sought than data science skills.\footnote{\url{<a href="http://stackoverflow.com/insights/survey/2017#salary%7D%7D">http://stackoverflow.com/insights/survey/2017#salary}}</a> For example, Mozilla&#x2019;s Kim Moir says she <code>recently looked at the undergrad classes required to graduate with a computer science degree from a major university, and [she] was struck by [a lack of] practice on deploying code. In most computer science programs, there is little emphasis on infrastructure&apos;&apos;~\cite{Adams:2015}. Similarly, Google&apos;s Boris Debic claims that </code>Release engineering is not taught; it&#x2019;s often not even mentioned in courses where it should be mentioned&#x2019;&#x2019;~\cite{Adams:2015}. For this reason, Facebook&#x2019;s Chuck Rossi considers hiring release engineers ``is like finding unicorns.&#x2019;&#x2019;</p>
-
+<p>Unfortunately, the skills required to construct and test these computing environments supporting continuous deployment requires expertise and training that is even more rare and highly sought than data science skills<sup class="footnote-ref" id="marked-fnref:survery"><a href="#marked-fn:survery">[survery]</a></sup>. For example, Mozilla&#x2019;s Kim Moir says she &#x201C;recently looked at the undergrad classes required to graduate with a computer science degree from a major university, and [she] was struck by [a lack of] practice on deploying code. In most computer science programs, there is little emphasis on infrastructure&#x201D; <sup class="footnote-ref" id="marked-fnref:Adams:2015"><a href="#marked-fn:Adams:2015">[Adams:2015]</a></sup>. 
+Similarly, Google&#x2019;s Boris Debic claims that &#x201C;Release engineering is not taught; it&#x2019;s often not even mentioned in courses where it should be mentioned&#x201D;<sup class="footnote-ref" id="marked-fnref:Adams:2015"><a href="#marked-fn:Adams:2015">[Adams:2015]</a></sup>. 
+For this reason, Facebook&#x2019;s Chuck Rossi considers hiring release engineers &#x201C;is like finding unicorns.&#x201D;</p>
 <p>In this study, we used our experiences and observations from five years of teaching over 400 students the concepts and tools related to continuous deployment in a university course~\cite{Parnin:DevOps}. Consider one assignment, where students were installing and configuring an open-source chat server called Mattermost\footnote{\url{<a href="https://mattermost.com/%7D%7D">https://mattermost.com/}}</a>, which works much like Slack\footnote{\url{<a href="https://slack.com/%7D%7D">https://slack.com/}}</a>. The computing environment requires several components: a database, system dependencies, the Mattermost server itself, and several configuration files (\texttt{systemd} services, \texttt{mysql.cnf}, and \texttt{config.json} for Mattermost). In configuring this environment, many things could go wrong. For example, a simple typo or malformed JSON in a configuration file could result in an non-functioning environment, but with little hints as to why. To diagnose this problem, students might need to check a variety of system components using a myriad of tools and shell utilities in which they have little experience, such as \texttt{mysql} shell, \texttt{systemctl}, \texttt{journalctl}, \texttt{cat}, \texttt{grep}, and \texttt{jq}. In response, we would have to ask a series of questions: <code>\emph{did you check your mysql credentials},&apos;&apos; </code>\emph{did you check your connection string is correct},&#x2019;&#x2019; <code>\emph{did you run jsonlint on your configuration file}.&apos;&apos; Other times, strange behaviors would result from incidental factors, which we would only resolve after asking, </code>\emph{did you check dns},&#x2019;&#x2019; ``\emph{did you check your VM&#x2019;s memory size}.&#x2019;&#x2019; Overall, this experience of asking students to perform various sanity checks eventually helped, but resulted in a frustrating and problematic learning environment for students.</p>
-
 <p>This book was born out personal development experiences, teaching several hundred of students DevOps practices, and consulting with dozens of software development companies at the fore-front of DevOps, and conversations with software giants such as Kent Beck, Jez Humble, and Leigh Honeywell.</p>
-
 <p>Exercises. Workshops. Contextualized with Practices at Companies.</p>
-
 <h2 id="core">Core</h2>
 <p>Automation.</p>
-
 <h3 id="devops">DevOps</h3>
 <p>History.</p>
-
 <h3 id="continuous-integration-continuous-delivery-continuous-deployment">Continuous Integration, Continuous Delivery, Continuous Deployment?</h3>
 <h2 id="teams">Teams</h2>
 <p>Silos, no ops.</p>
-
 <p>##</p>
-
 <h2 id></h2>
 <h2 id="other-books-and-resources">Other Books and Resources</h2>
 <p>Modern software development organizations require entire teams of DevOps to automate and maintain software engineering processes and infrastructure vital to the organization. In this course, you will gain practical exposure to the skills, tools, and knowledge needed in automating software engineering processes and infrastructure. Students will have the chance to build new or extend existing software engineering tools and design a DevOps pipeline.</p>
-
+<h3 id="references">References</h3>
 <p class="footnote"><span id="marked-fn:report">report:</span> And the footnote! <a href="#marked-fnref:report">&#x21A9;</a></p>
 <p class="footnote"><span id="marked-fn:gitlab">gitlab:</span> And the two! <a href="#marked-fnref:gitlab">&#x21A9;</a></p>
+<p class="footnote"><span id="marked-fn:survery">survery:</span> See <a href="http://stackoverflow.com/insights/survey/2017#salary">http://stackoverflow.com/insights/survey/2017#salary</a> <a href="#marked-fnref:survery">&#x21A9;</a></p>
+<p class="footnote"><span id="marked-fn:Adams:2015">Adams:2015:</span>  Cite Adams:2015 <a href="#marked-fnref:Adams:2015">&#x21A9;</a></p>
 </article></div>
