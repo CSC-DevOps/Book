@@ -21,12 +21,6 @@
           background-color: rgba(255,10,0,.05);
       }
 
-      .markdown-body .todo {
-        border-style: solid;
-        background-color: rgba(255,10,0,.05);
-      }
-
-
       .markdown-body pre
       {
         border-radius: 0.3rem;
@@ -114,31 +108,31 @@
 <h2 id="creating-a-simple-container-with-chroot">Creating a simple container with chroot</h2>
 <h3 id="create-a-headless-micro-vm-with-bakerx">Create a headless micro VM with bakerx</h3>
 <p>Pull an 3.9 alpine image and create a micro VM called, <code>con0</code>.</p>
-<pre><code class="language-bash">bakerx pull ottomatica/slim#images alpine3.9-simple
+<pre><code class="undefinedbash">bakerx pull ottomatica/slim#images alpine3.9-simple
 
 bakerx run con0 alpine3.9-simple</code></pre>
 <h3 id="prepare-a-simple-rootfs-with-busybox">Prepare a simple rootfs with busybox.</h3>
-<pre><code class="language-bash">mkdir -p rootfs/bin rootfs/sbin rootfs/usr/bin rootfs/usr/sbin
+<pre><code class="undefinedbash">mkdir -p rootfs/bin rootfs/sbin rootfs/usr/bin rootfs/usr/sbin
 
 wget https://www.busybox.net/downloads/binaries/1.31.0-defconfig-multiarch-musl/busybox-i686 -O rootfs/bin/busybox
 chmod +x rootfs/bin/busybox</code></pre>
 <p>Install symlinks inside the rootfs</p>
-<pre><code class="language-bash">chroot rootfs /bin/busybox --install -s</code></pre>
+<pre><code class="undefinedbash">chroot rootfs /bin/busybox --install -s</code></pre>
 <h3 id="playing-with-container">Playing with container</h3>
 <p>Let&#x2019;s try it out!</p>
-<pre><code class="language-bash">PS1=&quot;C-$ &quot; chroot rootfs /bin/busybox sh
+<pre><code class="undefinedbash">PS1=&quot;C-$ &quot; chroot rootfs /bin/busybox sh
 C-$ touch HELLO.txt
 C-$ ls
 C-$ exit</code></pre>
 <p>There is a minor problem. We have not perserved the isolation property for our filesystem, as the filesystem is still mutable.</p>
 <p>You can see new file exists in the file system, and worse, we can delete and mess up things.</p>
-<pre><code class="language-bash">PS1=&quot;C-$ &quot; chroot rootfs /bin/busybox sh
+<pre><code class="undefinedbash">PS1=&quot;C-$ &quot; chroot rootfs /bin/busybox sh
 ls
 rm HELLO.txt</code></pre>
 <h3 id="introducing-overlay-filesystem">Introducing overlay filesystem</h3>
 <p>Create a new <a href="container.sh">container.sh</a> file inside your micro VM and make it exectuable.
 This script will create a new snapshot of the filesystem everytime is it launched in order to run the container.</p>
-<pre><code class="language-bash">#!/bin/ash
+<pre><code class="undefinedbash">#!/bin/ash
 
 # Expect rootfs as script argument
 ROOTFS=$1
@@ -172,7 +166,7 @@ PS1=&quot;$nonce-# &quot; chroot /tmp/$nonce/overlay /bin/busybox sh</code></pre
 <li><p>Other devices of the host OS are not isolated, such as networking.</p>
 </li>
 <li><p>We may want to share and isolate other resources with the host. For example, if we mount the proc filesystem, we can kill any process on the system. Not good! A rogue container could interfere with other containers or bring down the whole system.</p>
-<pre><code class="language-bash">mkdir -p /tmp/$nonce/overlay/proc
+<pre><code class="undefinedbash">mkdir -p /tmp/$nonce/overlay/proc
 mount -t proc none /tmp/$nonce/overlay/proc</code></pre>
 </li>
 </ul>
@@ -181,7 +175,7 @@ mount -t proc none /tmp/$nonce/overlay/proc</code></pre>
 <h3 id="setup-1">Setup</h3>
 <h4 id="create-a-headless-micro-vm-with-bakerx-1">Create a headless micro VM with bakerx</h4>
 <p>Pull an ubuntu bionic image and create a micro VM called, <code>docker0</code>.</p>
-<pre><code class="language-bash">bakerx pull cloud-images.ubuntu.com bionic
+<pre><code class="undefinedbash">bakerx pull cloud-images.ubuntu.com bionic
 bakerx run docker0 bionic</code></pre>
 <h4 id="install-docker-inside-your-vm">Install docker inside your VM.</h4>
 <p>The recommended method for installing docker on ubuntu can be <a href="https://docs.docker.com/install/linux/docker-ee/ubuntu/#install-docker-ee-1">found here</a>.  But in the interest of time: :grimacing:</p>
@@ -194,12 +188,12 @@ bakerx run docker0 bionic</code></pre>
 <p>Pull an ubuntu image.</p>
 <pre><code>$ docker pull ubuntu:18.04</code></pre>
 <p>Check the size of the images.</p>
-<pre><code class="language-bash">$ docker images
+<pre><code class="undefinedbash">$ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 ubuntu              18.04               ccc6e87d482b        6 days ago          64.2MB
 hello-world         latest              fce289e99eb9        12 months ago       1.84kB</code></pre>
 <p>Let&#x2019;s create a simple container.</p>
-<pre><code class="language-bash">docker run ubuntu:18.04 sh</code></pre>
+<pre><code class="undefinedbash">docker run ubuntu:18.04 sh</code></pre>
 <p>Unfortunately, that doesn&#x2019;t quite do what we want, because a pseudo-tty allocated to the container, so we can use the terminal.</p>
 <pre><code>$ docker run -t ubuntu:18.04 sh
 # ls
@@ -210,12 +204,12 @@ exit
 <p>Unfortunately, that&#x2019;s still not enough. Docker isn&#x2019;t necessarily the most intuitive system, you see. You also need to allow input (<code>-i</code> Keep STDIN open even if not attached).</p>
 <pre><code>$ docker run -it ubuntu:18.04 sh</code></pre>
 <p>Finally, we can get to a terminal, and see we can run shell commands in our own private snapshot of the ubuntu image.</p>
-<pre><code class="language-bash">$ docker run -it ubuntu:18.04 sh
+<pre><code class="undefinedbash">$ docker run -it ubuntu:18.04 sh
 # ls
 # rm -rf --no-preserve-root /
 # exit</code></pre>
 <p>Oh no, what have we done? Is everything okay?</p>
-<pre><code class="language-bash">$ docker run -it ubuntu:18.04 sh</code></pre>
+<pre><code class="undefinedbash">$ docker run -it ubuntu:18.04 sh</code></pre>
 <h3 id="building-images">Building Images</h3>
 <p>We can create our own images.
 Create a &#x201C;Dockerfile&#x201D; and place this content inside:</p>
@@ -231,11 +225,11 @@ RUN apt-get -y install maven
 
 ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64</code></pre>
 <p>Build the docker image, and name it &#x201C;java11&#x201D;.</p>
-<pre><code class="language-bash">docker build -t java11 .</code></pre>
+<pre><code class="undefinedbash">docker build -t java11 .</code></pre>
 <p>We can see our image listed, now:</p>
-<pre><code class="language-bash">docker images</code></pre>
+<pre><code class="undefinedbash">docker images</code></pre>
 <p>Now, let&#x2019;s use it to run <code>mvn</code> to check our environment setup.</p>
-<pre><code class="language-bash">docker run java11 mvn --version</code></pre>
+<pre><code class="undefinedbash">docker run java11 mvn --version</code></pre>
 <h3 id="understanding-containers">Understanding containers</h3>
 <p>Look at all the containers you&#x2019;ve created by running commands above.</p>
 <pre><code>docker ps -a </code></pre>
@@ -243,13 +237,13 @@ ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64</code></pre>
 If we want a container to stick around, we need it to run in daemon mode, but adding the <code>-d</code> arg. We also provide a name for easy reference.</p>
 <pre><code>docker run --name test-d -it -d ubuntu:18.04</code></pre>
 <p>Let&#x2019;s use an one-liner to write a file to our running container.</p>
-<pre><code class="language-bash">docker exec -it test-d script /dev/null -c &quot;echo &apos;Hello&apos; &gt; foo.txt&quot;</code></pre>
+<pre><code class="undefinedbash">docker exec -it test-d script /dev/null -c &quot;echo &apos;Hello&apos; &gt; foo.txt&quot;</code></pre>
 <p>Make sure we can see change. Note we add <code>-t</code> to improve the output of <code>ls</code>:</p>
-<pre><code class="language-bash">docker exec -t test-d ls</code></pre>
+<pre><code class="undefinedbash">docker exec -t test-d ls</code></pre>
 <p>Now, let&#x2019;s commit this to our image. Any new container will now have &#x2018;foo.txt&#x2019; inside it.</p>
-<pre><code class="language-bash">docker commit test-d ubuntu:18.04</code></pre>
+<pre><code class="undefinedbash">docker commit test-d ubuntu:18.04</code></pre>
 <p>We can confirm that new containers do indeed have &#x2018;foo.txt&#x2019; inside:</p>
-<pre><code class="language-bash">$ docker run -t ubuntu:18.04 ls
+<pre><code class="undefinedbash">$ docker run -t ubuntu:18.04 ls
 bin   dev  foo.txt  lib    media  opt    root  sbin  sys  usr
 boot  etc  home     lib64  mnt      proc    run   srv   tmp  var</code></pre>
 <h3 id="volumes">Volumes</h3>
@@ -258,7 +252,7 @@ boot  etc  home     lib64  mnt      proc    run   srv   tmp  var</code></pre>
 <p>We should be able to see our host&#x2019;s directory home directory. Now, we can have a simple &#x201C;escape hatch&#x201D; to get data in and out of the container at the cost of losing true immutability. </p>
 <h3 id="build-script-demo">Build script demo</h3>
 <p>In your host VM, create &#x2018;build.sh&#x2019; and place the following inside:</p>
-<pre><code class="language-bash">git clone https://github.com/CSC-326/JSPDemo
+<pre><code class="undefinedbash">git clone https://github.com/CSC-326/JSPDemo
 cd JSPDemo
 mvn compile -DskipTests -Dmaven.javadoc.skip=true</code></pre>
 <pre><code>chmod +x build.sh

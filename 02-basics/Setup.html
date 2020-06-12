@@ -21,12 +21,6 @@
           background-color: rgba(255,10,0,.05);
       }
 
-      .markdown-body .todo {
-        border-style: solid;
-        background-color: rgba(255,10,0,.05);
-      }
-
-
       .markdown-body pre
       {
         border-radius: 0.3rem;
@@ -125,7 +119,7 @@
 <h5 id="installing-homebrew-on-mac-os-x">Installing HomeBrew on Mac OS X</h5>
 <p>Homebrew is a popular package manager for MacOS. To install, open a terminal window and run the install command shown on <a href="http://brew.sh/">http://brew.sh/</a>.</p>
 <p>Here is an example of how to install the utility <code>wget</code>.</p>
-<pre><code class="language-bash">brew install wget</code></pre>
+<pre><code class="undefinedbash">brew install wget</code></pre>
 <h5 id="installing-chocolatey-on-windows">Installing Chocolatey on Windows</h5>
 <p>Chocolatey is a package manager for Windows. </p>
 <p>Follow the instructions on the <a href="https://chocolatey.org/install">Chocolatey website</a> to install. 
@@ -159,10 +153,10 @@ Once Chocolatey is installed, you can use it to install other tools on your syst
 <h3 id="installing-opunit">Installing opunit</h3>
 <p>opunit requires <a href="https://nodejs.org/en/">node.js</a> to be installed.</p>
 <p>You can then install using npm:</p>
-<pre><code class="language-bash">npm install ottomatica/opunit -g</code></pre>
+<pre><code class="undefinedbash">npm install ottomatica/opunit -g</code></pre>
 <h3 id="checking-your-local-machine">Checking your local machine</h3>
 <p>You can check your local machine against a course profile, but running the following command:</p>
-<pre><code class="language-bash">opunit profile CSC-DevOps/profile:510.yml</code></pre>
+<pre><code class="undefinedbash">opunit profile CSC-DevOps/profile:510.yml</code></pre>
 <p>The resulting output might look something like this image below. The green check &#x2714;&#xFE0F; indicates that a check was passed, while the red x &#x274C; indicates that a check failed.</p>
 <p>For example, the first check will validate whether the version of node.js satisties the semver requirement of being at least <code>^10.x.x</code> or greater.</p>
 <p>Notice that one of the checks under &#x201C;Editor Support&#x201D;, fails to validate. This check looks for syntax highlighting being enabled for vim. This check fails because the .vimrc file is not presence on system.</p>
@@ -171,7 +165,7 @@ Once Chocolatey is installed, you can use it to install other tools on your syst
 <h3 id="running-opunit-for-a-workshopassignment">Running opunit for a workshop/assignment</h3>
 <p>You run opunit against a local profile, which is useful when working on an assignment or workshop.</p>
 <p>For example, if you are working on the <a href="https://github.com/CSC-DevOps/Pipelines">Pipelines workshop</a>, you can run opunit against the profile located in test/opunit.yml</p>
-<pre><code class="language-bash">opunit verify local</code></pre>
+<pre><code class="undefinedbash">opunit verify local</code></pre>
 <p>This will check whether you have correctly setup your pipeline for the workshop. Before doing anything, it would be expected for most checks to fail. As you complete more steps from the workshop, more checks should pass!</p>
 <h3 id="running-opunit-against-a-virtual-machine">Running opunit against a virtual machine</h3>
 <p>opunit can be run against a virtual machine, both locally on your machine, as well as remote virtual machines created on platforms such as AWS or digital ocean.</p>

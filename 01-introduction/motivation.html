@@ -21,12 +21,6 @@
           background-color: rgba(255,10,0,.05);
       }
 
-      .markdown-body .todo {
-        border-style: solid;
-        background-color: rgba(255,10,0,.05);
-      }
-
-
       .markdown-body pre
       {
         border-radius: 0.3rem;
@@ -109,7 +103,7 @@
 <p>The following is a Jupyter notebook plotting a simple graph.</p>
 <p><img src="imgs/seaborn.png" alt="seaborn-python-notebook"></p>
 <p>Rather than getting the desired result, often, the default experience is failure:</p>
-<pre><code class="language-python">ModuleNotFoundError: No module named &apos;seaborn&apos;</code></pre>
+<pre><code class="undefinedpython">ModuleNotFoundError: No module named &apos;seaborn&apos;</code></pre>
 <p>In fact, you might have difficulty running any Jupyter notebook you found. A study by Pimental et al. found that only 24% of Jupyter notebooks could be executed, and only 4% had reproducible results<sup class="footnote-ref" id="marked-fnref:Pimental:2019"><a href="#marked-fn:Pimental:2019">[Pimental:2019]</a></sup>. They note that reproducibility suffers because the notebook format does not encode dependencies or dependency versions. For example, the recent release of Tensorflow version 2.0 introduced many breaking changes. As a result, many Jupyter notebooks are not runnable with the latest version of the framework. This problem is not limited to just Jupyter notebooks. At Google, Seo et al. also found that approximately 50% of build errors are caused by dependencies<sup class="footnote-ref" id="marked-fnref:Seo:2014"><a href="#marked-fn:Seo:2014">[Seo:2014]</a></sup>.
 Horton and Parnin found only 24.4% of Python gists from GitHub run without error. The main cause of failure, experienced by 52.4% of the gists evaluated, was a dependency error.  Further, the effort involved in manually constructing an environment specification is non-trivial &#x2014; developers can spend between 20 minutes and 2 hours creating a Dockerfile for a single code snippet, and often fail to construct a valid specification<sup class="footnote-ref" id="marked-fnref:Horton:2018"><a href="#marked-fn:Horton:2018">[Horton:2018]</a></sup>.</p>
 <p>In general, Jean Yang, a promiment computer scientist with a PhD from MIT, summaries this experience as a developer:</p>
@@ -125,7 +119,10 @@ Horton and Parnin found only 24.4% of Python gists from GitHub run without error
 <blockquote>
 <p>You will learn how to design, deploy, and operate code and its computing environment&#x2014;not as isolated concerns&#x2014;but co-equal partners.</p>
 </blockquote>
-<pre><code class="language-warning">TODO: Fix references.</code></pre>
-<h3 id="references">References</h3>
+
+                <pre class="warning"><code>
+                    TODO: Fix references.
+                </code></pre>
+                <h3 id="references">References</h3>
 <p class="footnote"><span id="marked-fn:Pimental:2019">Pimental:2019:</span> A large-scale study about quality and reproducibility of jupyter notebooks, in Proceedings of the 16th International Conference on Mining Software Repositories (MSR), 2019. <a href="#marked-fnref:Pimental:2019">&#x21A9;</a></p>
 </article></div>

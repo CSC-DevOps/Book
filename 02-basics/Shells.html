@@ -21,12 +21,6 @@
           background-color: rgba(255,10,0,.05);
       }
 
-      .markdown-body .todo {
-        border-style: solid;
-        background-color: rgba(255,10,0,.05);
-      }
-
-
       .markdown-body pre
       {
         border-radius: 0.3rem;
@@ -154,7 +148,7 @@
 </ul>
 <h5 id="combining-commands">Combining commands</h5>
 <p>Command can run sequentially or conditionally:</p>
-<pre><code class="language-bash">command1 ; command2
+<pre><code class="undefinedbash">command1 ; command2
 (command1 ; command2) # in a sub-shell
 command1 || command2  # do command2 only if command1 fails
 command1 &amp;&amp; command2  # do command2 only if command1 succeeds</code></pre>
@@ -162,7 +156,7 @@ command1 &amp;&amp; command2  # do command2 only if command1 succeeds</code></pr
 <h5 id="command-io">Command I/O</h5>
 <p>The UNIX shell commands push data from sources through filters along pipes. In a shell there are three sources of I/O: standard input (stdin), standard output (stout), and standard error (sterr). Standard error is a specialized version of standard out, so we&#x2019;ll focus on standard in and standard out.  The default for standard in is the keyboard and the default for standard out is to print to the shell (or console).</p>
 <p>Pipes and redirects change standard in and standard out from defaults.</p>
-<pre><code class="language-bash">command              # default standard in and standard out
+<pre><code class="undefinedbash">command              # default standard in and standard out
 command &lt; inputFile  # redirect of inputFile contents to command as standard in
 command &gt; outputFile # redirect command output to outputFile as standard out
 command1 | command2  # pipes output of command1 as standard in to command2
@@ -179,24 +173,24 @@ command &amp;            # run in background, typically used for applications</c
 <li><code>PROMPT_COMMAND=&quot;echo -n [$(date +%H:%M)]&quot;</code>: Print the date in hours and minutes.</li>
 </ul>
 <p>Create a local configuration file named <code>.bash_prompt</code>:</p>
-<pre><code class="language-bash">PROMPT_COMMAND=&apos;PS1=&quot;\[\033[0;33m\][\!]\`if [[ \$? = &quot;0&quot; ]]; then echo &quot;\\[\\033[32m\\]&quot;; else echo &quot;\\[\\033[31m\\]&quot;; fi\`[\u.\h: \`if [[ `pwd|wc -c|tr -d &quot; &quot;` &gt; 18 ]]; then echo &quot;\\W&quot;; else echo &quot;\\w&quot;; fi\`]\$\[\033[0m\] &quot;; echo -ne &quot;\033]0;`hostname -s`:`pwd`\007&quot;&apos;</code></pre>
+<pre><code class="undefinedbash">PROMPT_COMMAND=&apos;PS1=&quot;\[\033[0;33m\][\!]\`if [[ \$? = &quot;0&quot; ]]; then echo &quot;\\[\\033[32m\\]&quot;; else echo &quot;\\[\\033[31m\\]&quot;; fi\`[\u.\h: \`if [[ `pwd|wc -c|tr -d &quot; &quot;` &gt; 18 ]]; then echo &quot;\\W&quot;; else echo &quot;\\w&quot;; fi\`]\$\[\033[0m\] &quot;; echo -ne &quot;\033]0;`hostname -s`:`pwd`\007&quot;&apos;</code></pre>
 <p>Then enable your new prompt with:</p>
 <pre><code>source .bash_prompt</code></pre>
 <p>Try running a simple command, like <code>ls</code>. Notice the green prompt. Now try running a non-existing command, such as <code>foo</code>. Notice the red prompt.</p>
 <p><strong>Exercise</strong>: Customize your bash prompt. Use a google search, reference <a href="https://www.maketecheasier.com/8-useful-and-interesting-bash-prompts/">articles</a>, or search on GitHub for &#x201C;dotfiles&#x201D; as a source for inspiration.</p>
 <h2 id="activity-data-wrangling-with-bash">Activity: Data Wrangling with bash</h2>
 <p>Download data with <code>wget</code>.</p>
-<pre><code class="language-bash">wget -nc https://s3-us-west-2.amazonaws.com/producthunt-downloads/ph-export--2016-04-01.tar.gz</code></pre>
+<pre><code class="undefinedbash">wget -nc https://s3-us-west-2.amazonaws.com/producthunt-downloads/ph-export--2016-04-01.tar.gz</code></pre>
 <p>Create a directory to store the tar file contents</p>
 <pre><code>mkdir product-hunt </code></pre>
 <p>Extract the archive and verify csv files exist inside the product-hunt folder.</p>
-<pre><code class="language-bash">tar -zxvf ph-export--2016-04-01.tar.gz -C product-hunt/
+<pre><code class="undefinedbash">tar -zxvf ph-export--2016-04-01.tar.gz -C product-hunt/
 ls product-hunt/</code></pre>
 <p>Data wrangling. </p>
 <p>List the column headers inside the &#x201C;users.*.csv&#x201D; file</p>
-<pre><code class="language-bash">head -n 1 product-hunt/users--2016-04-01_14-36-26-UTC.csv</code></pre>
+<pre><code class="undefinedbash">head -n 1 product-hunt/users--2016-04-01_14-36-26-UTC.csv</code></pre>
 <p>Extract a column of text from a file, using <code>cut</code>.</p>
-<pre><code class="language-bash">cut -f 2 -d &apos;;&apos; product-hunt/posts*.csv | head</code></pre>
+<pre><code class="undefinedbash">cut -f 2 -d &apos;;&apos; product-hunt/posts*.csv | head</code></pre>
 <h4 id="exercise">Exercise</h4>
 <p>Using a combination of <code>cut</code>, <code>wc</code>, <code>head</code>, <code>tail</code>, <code>grep</code>, <code>sort</code>, <code>uniq</code>, pipes (<code>|</code>) and any other unix suitable commands, create a command that calculates the following. For each task, save the answers results in a file named, <code>data-a1.txt</code>, <code>data--a2.txt</code>, and so on&#x2026;</p>
 <ul>
@@ -249,7 +243,7 @@ true</code></pre>
 </ul>
 <p>While you do these all in the context of a interactive shell, some of the following are particular useful for writing multiple lines of scripts.</p>
 <p>Useful conditionals and loops:</p>
-<pre><code class="language-bash">if command; then
+<pre><code class="undefinedbash">if command; then
    commands
 fi
 
@@ -259,13 +253,13 @@ while command; do
   commands
 done</code></pre>
 <p>Storing variables and results of commands; referencing variables</p>
-<pre><code class="language-bash">e=expansion
+<pre><code class="undefinedbash">e=expansion
 e=$(command)
 $e
 echo &quot;result is: $e&quot;</code></pre>
 <p><strong>Activity</strong>: Imagine you wanted to write a &#x201C;dead&#x201D; startup checker using the product hunt data. Using the script below, you would be able check if a startup&#x2019;s url was still alive.</p>
 <p>Save this in a file called <code>checker.sh</code>:</p>
-<pre><code class="language-bash">#!/bin/bash
+<pre><code class="undefinedbash">#!/bin/bash
 
 # Print error message and exit with error code 1
 function die {
@@ -305,9 +299,9 @@ while read -r line; do
 
 done &lt;&lt;&lt; &quot;$RESULTS&quot;</code></pre>
 <p>Make sure the script file is executable:</p>
-<pre><code class="language-bash">chmod +x checker.sh</code></pre>
+<pre><code class="undefinedbash">chmod +x checker.sh</code></pre>
 <p>Run the script:</p>
-<pre><code class="language-bash">./checker.sh product-hunt/posts--2016-04-01_14-36-24-UTC.csv 3</code></pre>
+<pre><code class="undefinedbash">./checker.sh product-hunt/posts--2016-04-01_14-36-24-UTC.csv 3</code></pre>
 <p>You should see output like this:</p>
 <pre><code>Checking first 3 in product-hunt/posts--2016-04-01_14-36-24-UTC.csv
 We Are Heroes (&#x1F480;): http://www.producthunt.com/l/b3443c7ac79b50 =&gt; 404
@@ -318,14 +312,14 @@ Captain Strike (&#x1F480;): http://www.producthunt.com/l/45fad46fe3f810 =&gt; 40
 <h2 id="weird-but-useful-features-and-commands-in-bash">Weird but useful features and commands in bash</h2>
 <h3 id="heredoc">Heredoc</h3>
 <p>In some situations, you might need to send multi-line content as input to a command or to store as a file. <code>heredoc</code> is an input mechanism that allows you to enter in text (interactively or in a script), until a delimiter string is reached (&#x2018;END_DOC&#x2019;). </p>
-<pre><code class="language-bash">cat &lt;&lt; &apos;END_DOC&apos; &gt; .functions
+<pre><code class="undefinedbash">cat &lt;&lt; &apos;END_DOC&apos; &gt; .functions
 mostUsed()
 {
 history | awk &apos;{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] &quot; &quot; CMD[a]/count*100 &quot;% &quot; a;}&apos; | grep -v &quot;./&quot; | column -c3 -s &quot; &quot; -t | sort -nr | nl |  head -n10    
 }
 END_DOC</code></pre>
 <p>Load the defined function. Then we can see which command you run the most.</p>
-<pre><code class="language-bash">source .functions
+<pre><code class="undefinedbash">source .functions
 mostUsed</code></pre>
 <p>Heredoc can also be useful for running command on input you&#x2019;d like to type in manually or paste from your clipboard and don&#x2019;t want to bother placing in a file:</p>
 <p>Count the number of words and characters in text:</p>
@@ -335,16 +329,16 @@ EOF</code></pre>
 <h3 id="dd">dd</h3>
 <p><code>dd</code> can be useful for cloning disk drives or disk images, creating test data, and just generally wrecking havoc on disks (which could be useful for chaos engineering experiments).</p>
 <p>Create a 1MB file with zeros.</p>
-<pre><code class="language-bash">dd if=/dev/zero of=zeros.txt count=1024 bs=1024</code></pre>
+<pre><code class="undefinedbash">dd if=/dev/zero of=zeros.txt count=1024 bs=1024</code></pre>
 <p>Create a 20K file with random bytes.</p>
-<pre><code class="language-bash">dd if=/dev/urandom of=random.txt bs=2048 count=10</code></pre>
+<pre><code class="undefinedbash">dd if=/dev/urandom of=random.txt bs=2048 count=10</code></pre>
 <h3 id="expect">expect</h3>
 <!-- Helpful: https://superuser.com/questions/1166920/how-do-i-send-the-stdout-of-a-command-to-an-expect-input -->
 
 <p>Expect the unexpected. If you need to automate a command which could prompt for input, then you can use <code>expect</code> to help respond to that input.</p>
 <p>Just as a simple example, if you ran this code <code>python -c &quot;print( input(&apos;Enter value: &apos;) )&quot;</code>, it will wait around until you typed something, which could be a problem if you&#x2019;re doing this 1000s of times or run in an automation script.</p>
 <p>By using expect, you can create scripts that automatically response to prompt inputs.</p>
-<pre><code class="language-bash">expect &lt;&lt;- END
+<pre><code class="undefinedbash">expect &lt;&lt;- END
     spawn python -c &quot;print( input(&apos;Enter value: &apos;) )&quot;
     expect {
         &quot;Enter value: &quot; { send &quot;42\r&quot;}
@@ -379,9 +373,9 @@ touch $LOCKFILE
 # Program (listen on port 5100)
 nc -k -l 5100 | bash</code></pre>
 <p>This will run a simple bash server that you can send commands to over the network.</p>
-<pre><code class="language-bash">./server.sh</code></pre>
+<pre><code class="undefinedbash">./server.sh</code></pre>
 <p>In a new terminal window, run:</p>
-<pre><code class="language-bash">echo &quot;ls&quot; &gt;/dev/tcp/127.0.0.1/5100</code></pre>
+<pre><code class="undefinedbash">echo &quot;ls&quot; &gt;/dev/tcp/127.0.0.1/5100</code></pre>
 <p>You should see your direct connects appear in your other terminal running the server process. If you try running <code>./server.sh</code> in another terminal, it should prevent you from running again.</p>
 <h2 id="remote-connections">Remote connections</h2>
 <p>In many situations, you may find that you need to run commands for development or debugging on remote servers. Most likely, you will initate this connection over a ssh connection.</p>
