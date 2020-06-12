@@ -1,0 +1,246 @@
+<!DOCTYPE html><html><head><meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+         <meta content="utf-8" http-equiv="encoding"><style>
+      .markdown-body {
+          box-sizing: border-box;
+          min-width: 200px;
+          max-width: 980px;
+          margin: 0 auto;
+          padding: 45px;
+          border-style: dotted solid;
+      }
+  
+        @media (max-width: 767px) {
+          .markdown-body {
+              padding: 15px;
+          }
+          .sidebar {padding-top: 15px;}
+      }
+  
+      .markdown-body .warning {
+          border-style: solid;
+          background-color: rgba(255,10,0,.05);
+      }
+
+      .markdown-body pre
+      {
+        border-radius: 0.3rem;
+        border: solid 1px #dce6f0;
+      }
+
+      .main {
+        margin-left: 200px; /* Same as the width of the sidenav */
+        padding: 0px 10px;
+      }
+
+      /* The sidebar menu */
+      .sidebar {
+        height: 100%; /* Full-height: remove this if you want "auto" height */
+        width: 200px; /* Set the width of the sidebar */
+        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        background-color: #F2E9E4; 
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 20px;
+        padding-left: 10px;
+        color: #261C16;
+        border: 1px solid #D9D0C7;
+      }
+
+      /* The navigation menu links */
+      .sidebar a {
+        color: #261C16;
+        display: block;
+      }
+
+      /* When you mouse over the navigation links, change their color */
+      .sidebar a:hover {
+        color: #8C8480;
+      }
+
+      .markdown-body .footnote-ref {
+          padding-left:1px;
+      }
+
+      .markdown-body .footnote-ref a {
+        color: #261C16;
+        text-decoration: none;
+      }
+
+      </style>
+    <link rel="stylesheet" href="/Book/github-markdown.css"><link rel="stylesheet" href="/Book/github.css"></head></html><div class="sidebar">
+            <h3 id="home"><a href="/Book/">Home</a></h3>
+<h3 id="introduction">Introduction</h3>
+<ul>
+<li><a href="/Book/01-introduction/about.html">About this book</a></li>
+<li><a href="/Book/01-introduction/motivation.html">Motivation</a></li>
+<li><a href="/Book/01-introduction/bigideas.html">Big Ideas</a></li>
+</ul>
+<h3 id="engineering-basics">Engineering Basics</h3>
+<ul>
+<li><a href="/Book/02-basics/basicskills.html">Basic Skills</a></li>
+<li><a href="/Book/02-basics/Shells.html">Resources</a></li>
+<li><a href="/Book/02-basics/Setup.html">An installation philosophy</a></li>
+<li><a href="/Book/02-basics/Environments.html">A philosophy: Be able to throw away your machine and still code</a></li>
+<li><a href="/Book/02-basics/profile.html">Checking your local environment</a></li>
+</ul>
+<h3 id="computing-environments">Computing Environments</h3>
+<ul>
+<li><a href="/Book/03-environments/virtualization.html">Virtualization</a></li>
+<li><a href="/Book/03-environments/VM.html">Preqs</a></li>
+<li><a href="/Book/03-environments/provision.html">REST Refresher</a></li>
+<li><a href="/Book/03-environments/containers.html">Setup</a></li>
+</ul>
+<h3 id="configuration-management">Configuration Management</h3>
+<ul>
+<li><a href="/Book/04-configuration/configure.html">Configure</a></li>
+</ul>
+<h3 id="monitoring">Monitoring</h3>
+<ul>
+<li><a href="/Book/14-monitoring/monitoring.html">Monitoring</a></li>
+<li><a href="/Book/14-monitoring/workshop.html">Workshop</a></li>
+</ul>
+
+            </div><div class="main"><article class="markdown-body"><h1 id="monitoring">Monitoring</h1>
+<p>In this workshop, we&#x2019;ll cover the basic principles related to establishing a monitoring infrastructure.  </p>
+<p><img src="https://raw.githubusercontent.com/CSC-DevOps/Monitoring/master/img/monitor-workshop.png" alt="image"></p>
+<h3 id="monitoring-architecture">Monitoring Architecture</h3>
+<p><img src="https://raw.githubusercontent.com/CSC-DevOps/Monitoring/master/img/monitor-arch.png" alt="arch"></p>
+<p>The monitoring infrastructure has several components.</p>
+<h5 id="dashboard">Dashboard</h5>
+<p>The dashboard visualization is located in <code>dashboard/www/</code>. The webpage uses vue.js to implement databinding between the server metrics and the html components (i.e. Model-View-ViewModel).</p>
+<h5 id="events-with-socketio-monitor-service--dashboard">Events with socket.io (monitor service =&gt; dashboard)</h5>
+<p>Another technology that you have not been previously exposed to is <a href="http://socket.io/">socket.io</a>. The code in <code>dashboard/metrics/index.js</code> creates a websocket that publishes events for the dashboard to consume and display.</p>
+<h5 id="publish-subscribe-with-redis-agents--monitor-service">Publish-subscribe with redis (agents =&gt; monitor service)</h5>
+<p>The agent and dashboard communicate through a <a href="https://redis.io/topics/pubsub">publish-subscribe message paradigm</a> provided by the redis <code>PUBLISH</code> and <code>SUBSCRIBE</code> commands. The redis server is hosted on the monitor server.</p>
+<p>Here, you can see the monitoring agent <em>publishing</em> metrics to a channel (corresponding to the server name), every 1 second (<code>agent/index.js</code>).</p>
+<pre><code class="undefinedjs">    // Push update ever 1 second
+    setInterval(async function()
+    {
+        let payload = {
+            memoryLoad: agent.memoryLoad(),
+            cpu: await agent.cpu()
+        };
+        let msg = JSON.stringify(payload);
+        await client.publish(name, msg);
+        console.log(`${name} ${msg}`);
+    }, 1000);</code></pre>
+<p>Likewise, you can see the monitoring service <em>subscribing</em> to updates from a channel (<code>dashboard/metrics/index.js</code>).</p>
+<pre><code class="undefinedjs">// When an agent has published information to a channel, we will receive notification here.
+    client.on(&quot;message&quot;, function (channel, message) 
+    {
+        console.log(`Received message from agent: ${channel}`)
+        for( var server of servers )
+        {
+            // Update our current snapshot for a server&apos;s metrics.
+            if( server.name == channel)
+            {
+                let payload = JSON.parse(message);
+                server.memoryLoad = payload.memoryLoad;
+                server.cpu = payload.cpu;
+                updateHealth(server);
+            }
+        }
+    });</code></pre>
+<h5 id="servers-being-monitored">Servers being monitored</h5>
+<p>You have three servers running, which are accessible through a port forward on your localhost (ports 9001, 9002, and 9003). Furthermore, each server provides the following services accessible under these endpoints: <code>/</code>, <code>/work</code>, and <code>/stackless</code>&#x2014;each endpoint provides different levels of workload for the server, with <code>/work</code> being the most computationally expensive.</p>
+<h5 id="monitoring-agent">Monitoring agent</h5>
+<p>The monitoring agent is in <code>agent/index.js</code>.</p>
+<p>You will need to complete the code for the monitoring agent, and then install it on the servers being monitored.</p>
+<pre><code class="undefinedjs">// TASK 1: Calculate metrics.
+class Agent
+{
+    memoryLoad()
+    {
+       return 0;
+    }
+    async cpu()
+    {
+       return 0;
+    }
+}</code></pre>
+<p>The package, <a href="https://www.npmjs.com/package/systeminformation"><code>systeminformation</code></a>, has an extensive collection of utils for obtaining and measuring system metrics.</p>
+<h2 id="workshop">Workshop</h2>
+<h3 id="before-you-start">Before you start</h3>
+<p>Clone this repository.</p>
+<p>Pull the following bakerx images.</p>
+<pre><code class="undefinedbash"># Updated to allow redis access from remote hosts
+bakerx pull CSC-DevOps/Images#Spring2020 queues
+bakerx pull CSC-DevOps/Images#Spring2020 alpine-node</code></pre>
+<p>Bring up the infrastructure.</p>
+<pre><code class="undefinedbash">cd Monitoring/servers
+npm install
+node index up</code></pre>
+<p>Inspect the console output for any errors, then confirm VMs have started in VirtualBox.</p>
+<p><img src="https://raw.githubusercontent.com/CSC-DevOps/Monitoring/master/img/vbox.png" alt="vbox"></p>
+<p>Open a terminal dedicated to the monitor instance and ssh into machine, <code>bakerx ssh monitor</code>.
+Change into dashboard directory (which will be mounted at <code>/bakerx</code>), install packages, and start dashboard service.</p>
+<pre><code class="undefinedbash">cd /bakerx
+npm install
+node bin/www</code></pre>
+<p>Visit the monitoring dashboard at <a href="http://192.168.44.92:8080/">http://192.168.44.92:8080/</a>. Confirm you can see the dashboard running.</p>
+<h2 id="monitoring-infrastructure">Monitoring infrastructure</h2>
+<h3 id="task-1-add-memorycpu-metrics">Task 1: Add memory/cpu metrics.</h3>
+<p>Modify <code>function memoryLoad()</code> to calculate the amount of memory currently used by the system as a percentage.
+Modify <code>function cpuAverage()</code> to calculate the amount of load the cpu is under as a percentage (see <a href="https://www.npmjs.com/package/systeminformation#8-current-load-processes--services"><code>systeminformation.currentLoad</code></a>).</p>
+<p>Once you&#x2019;ve completed your code updates, you can test it out by registering your computer as client. Simply run the agent as follows:</p>
+<pre><code>cd agent/
+node index.js computer</code></pre>
+<p>You should be able to verify your metrics being displayed in the dashboard. Recall, you should have <code>node bin/www</code> running inside the monitor VM.</p>
+<h5 id="install-agent-on-servers">Install agent on servers.</h5>
+<p>You can deploy this agent to run on your servers by using the <code>push</code> command provided in the driver:</p>
+<pre><code class="undefinedbash">cd servers/
+node index.js push</code></pre>
+<p>You should see memory/cpu information being displayed in the dashboard for all the servers, including your computer.</p>
+<h3 id="task-2-latency-and-http-status-codes">Task 2: Latency and HTTP status codes.</h3>
+<p>Collecting metrics related to availability and efficiency of services often requires an external third-party. Here, the monitor service will be extended to collect data related to latency and service status.</p>
+<p>Extend the code inside <code>dashboard/metrics/index.js</code> to collect the latency and status code of the http response (<code>res.statusCode</code>).</p>
+<pre><code class="undefinedjs">    // LATENCY CHECK
+    var latency = setInterval( function () 
+    {
+        ...
+                got(server.url, {timeout: 5000, throwHttpErrors: false}).then(function(res)
+        ...</code></pre>
+<p>Restart the monitoring service, you should see the dashboard display latency information.</p>
+<h3 id="task-3-calculate-and-display-server-health">Task 3: Calculate and display server health.</h3>
+<p>You want to make an overall assessment of a server&#x2019;s health. We will be using our four metrics to calculate an overall health score (4 being good healthy and 0 being unhealthy).</p>
+<p>Update the code inside <code>dashboard/metrics/index.js#updateHealth(server)</code> to 
+create a metric that calculates an overall score from memoryLoad, cpu, latency, and statusCode.</p>
+<p>You should see the dashboard reflect the health of your servers in the server status field, as well as sparkline update to indicate the changes in score&#x2019;s trend per server.</p>
+<h3 id="task-4-load-services">Task 4: Load services.</h3>
+<p>From your host computer, you should be able to visit <code>http://localhost:9001/work</code> in your browser, or make a curl request <code>curl http://localhost:9001/work</code> and see corresponding changes in the metrics from your dashboard.</p>
+<p>Notice the impact of the workload based on hitting different endpoints:</p>
+<ul>
+<li><a href="http://localhost:9001/">http://localhost:9001/</a></li>
+<li><a href="http://localhost:9001/stackless">http://localhost:9001/stackless</a></li>
+<li><a href="http://localhost:9001/work">http://localhost:9001/work</a></li>
+</ul>
+<h5 id="can-we-create-a-even-bigger-load">Can we create a even bigger load?</h5>
+<p>Siege is a tool for performing load testing of a site.</p>
+<pre><code>vagrant@ubuntu-bionic:/bakerx/metrics$ siege -b -t30s http://172.30.164.193:9001/
+** SIEGE 4.0.4
+** Preparing 25 concurrent users for battle.
+The server is now under siege...
+Lifting the server siege...
+Transactions:                  34088 hits
+Availability:                 100.00 %
+Elapsed time:                  29.10 secs
+Data transferred:               0.39 MB
+Response time:                  0.02 secs
+Transaction rate:            1171.41 trans/sec
+Throughput:                     0.01 MB/sec
+Concurrency:                   24.63
+Successful transactions:       34088
+Failed transactions:               0
+Longest transaction:            0.53
+Shortest transaction:           0.00</code></pre>
+<h5 id="installing-siege">Installing siege</h5>
+<p>Mac: <code>brew install siege</code><br>Linux: <code>apt-get install siege</code><br>Windows: Install inside the monitor server (<code>bakerx ssh monitor</code>). Note: You should use the ip of your host computer (see dashboard/metrics/ip.txt) instead of localhost to create the desired effect.</p>
+<p>Experiment with loading the server by hitting different endpoints. Can you cause the service to timeout?</p>
+<pre><code>siege -b -t30s http://localhost:9001/
+siege -b -t30s http://localhost:9001/stackless
+siege -b -t30s http://localhost:9001/work</code></pre>
+<h3 id="task-5-new-metric">Task 5: New metric.</h3>
+<p>Add a new metric in the agent and display it in the dashboard. This should help you better understand the flow of the monitoring collection, broadcast mechanics, and display of metrics.</p>
+</article></div>
