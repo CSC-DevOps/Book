@@ -1,0 +1,285 @@
+<!DOCTYPE html><html><head><meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+         <meta content="utf-8" http-equiv="encoding"><style>
+      .markdown-body {
+          box-sizing: border-box;
+          min-width: 200px;
+          max-width: 980px;
+          margin: 0 auto;
+          padding: 45px;
+          border-style: dotted solid;
+      }
+  
+        @media (max-width: 767px) {
+          .markdown-body {
+              padding: 15px;
+          }
+          .sidebar {padding-top: 15px;}
+      }
+  
+      .markdown-body .warning {
+          border-style: solid;
+          background-color: rgba(255,10,0,.05);
+      }
+
+      .markdown-body pre
+      {
+        border-radius: 0.3rem;
+        border: solid 1px #dce6f0;
+      }
+
+      .main {
+        margin-left: 200px; /* Same as the width of the sidenav */
+        padding: 0px 10px;
+      }
+
+      /* The sidebar menu */
+      .sidebar {
+        height: 100%; /* Full-height: remove this if you want "auto" height */
+        width: 200px; /* Set the width of the sidebar */
+        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        background-color: #F2E9E4; 
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 20px;
+        padding-left: 10px;
+        color: #261C16;
+        border: 1px solid #D9D0C7;
+      }
+
+      /* The navigation menu links */
+      .sidebar a {
+        color: #261C16;
+        display: block;
+      }
+
+      /* When you mouse over the navigation links, change their color */
+      .sidebar a:hover {
+        color: #8C8480;
+      }
+
+      .markdown-body .footnote-ref {
+          padding-left:1px;
+      }
+
+      .markdown-body .footnote-ref a {
+        color: #261C16;
+        text-decoration: none;
+      }
+
+      </style>
+    <link rel="stylesheet" href="/Book/github-markdown.css"><link rel="stylesheet" href="/Book/github.css"></head></html><div class="sidebar">
+            <h3 id="home"><a href="/Book/">Home</a></h3>
+<h3 id="introduction">Introduction</h3>
+<ul>
+<li><a href="/Book/01-introduction/about.html">About this book</a></li>
+<li><a href="/Book/01-introduction/motivation.html">Motivation</a></li>
+<li><a href="/Book/01-introduction/bigideas.html">Big Ideas</a></li>
+</ul>
+<h3 id="engineering-basics">Engineering Basics</h3>
+<ul>
+<li><a href="/Book/02-basics/basicskills.html">Basic Skills</a></li>
+<li><a href="/Book/02-basics/Shells.html">Resources</a></li>
+<li><a href="/Book/02-basics/Setup.html">An installation philosophy</a></li>
+<li><a href="/Book/02-basics/Environments.html">A philosophy: Be able to throw away your machine and still code</a></li>
+<li><a href="/Book/02-basics/profile.html">Checking your local environment</a></li>
+</ul>
+<h3 id="computing-environments">Computing Environments</h3>
+<ul>
+<li><a href="/Book/03-environments/virtualization.html">Virtualization</a></li>
+<li><a href="/Book/03-environments/VM.html">Preqs</a></li>
+<li><a href="/Book/03-environments/provision.html">REST Refresher</a></li>
+<li><a href="/Book/03-environments/containers.html">Setup</a></li>
+</ul>
+<h3 id="configuration-management">Configuration Management</h3>
+<ul>
+<li><a href="/Book/04-configuration/configure.html">Configure</a></li>
+</ul>
+
+            </div><div class="main"><article class="markdown-body"><h1 id="vm">VM</h1>
+<h2 id="preqs">Preqs</h2>
+<ul>
+<li>Ensure you have <code>node --version &gt;= 12.14</code>.</li>
+<li>Ensure you have <code>bakerx --version &gt;= 0.6.2</code>.</li>
+<li>Ensure you have <a href="https://www.virtualbox.org/">VirtualBox installed</a>.</li>
+</ul>
+<p>To install latest bakerx, run <code>npm install -g ottomatica/bakerx</code>.
+If working from the project source, update it by changing into the project folder and run: <code>git pull</code>, and then <code>npm update</code>.</p>
+<h2 id="creating-a-headless-micro-vm-with-bakerx">Creating a headless micro VM with bakerx</h2>
+<p>Pull an 3.9 alpine image.</p>
+<pre><code>bakerx pull ottomatica/slim#images alpine3.9-simple</code></pre>
+<p>Check which images are available on your system.</p>
+<pre><code class="undefinedbash">bakerx images</code></pre>
+<p>Verify your image downloaded.</p>
+<pre><code>&#x252C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x252C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x252C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;
+&#x2502;         image         &#x2502;   format   &#x2502;  providers  &#x2502;
+&#x253C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x253C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x253C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2524;
+&#x2502;  &apos;alpine3.9-simple&apos;   &#x2502; &apos;vbox.iso&apos; &#x2502; &apos;qemu,vbox&apos; &#x2502;</code></pre>
+<p>Create a new VM instance, named &#x201C;alp3.9&#x201D;.</p>
+<pre><code class="undefinedbash">bakerx run alp3.9 alpine3.9-simple</code></pre>
+<p><img src="https://raw.githubusercontent.com/CSC-DevOps/VM/master/imgs/VM-run.png" alt="img"></p>
+<h3 id="virtual-machine-inspection-through-virtualbox-show">Virtual Machine Inspection through VirtualBox Show.</h3>
+<p><img src="https://raw.githubusercontent.com/CSC-DevOps/VM/master/imgs/VM-preview.png" alt="img"></p>
+<p>Let&#x2019;s ensure we can interact with the VM by clicking &#x201C;Show&#x201D;. This will open a small terminal into virtual box. This is useful for quickly determining if your VM is working, which could fail to boot, or otherwise not be reachable if networking is broken.</p>
+<p>Close the preview window, but still leave the VM &#x201C;Continue running in the background&#x201D;.</p>
+<h3 id="connecting-to-vm-via-ssh">Connecting to VM via ssh.</h3>
+<p>Using the ssh command provided by the <code>bakerx run</code> command, we can connect to the machine.</p>
+<h3 id="storagedisk">Storage/Disk</h3>
+<p><img src="https://raw.githubusercontent.com/CSC-DevOps/VM/master/imgs/VM-storage-iso.png" alt="img"></p>
+<p>The image is loaded as a DVD into a disk drive. <em>Note: the size of the image: 26MB</em>.</p>
+<h3 id="power-and-vm-state">Power and VM State</h3>
+<p>You can control when a VM is running, saved, or turned off.</p>
+<p>When a virtual machine is not being used, you have to option to &#x201C;Power-off&#x201D; the machine, which is essentially like pulling the power cord on a machine. There is a small risk that any work you saved on the virtual disk may not be persisted in the event of a sudden outtage.</p>
+<p>You can also &#x201C;Save&#x201D; the VM machine, which will persist the entire state of the machine, including RAM. Similiarly, you can take a &#x201C;Snapshot&#x201D; which will copy the state of the VM.</p>
+<p><strong>Persistance lost:</strong> In this case, because the only storage available to our micro VM is a disk drive, if you pull the plug, everything you changed is lost.</p>
+<p>Short demo:</p>
+<blockquote>
+<p>Let&#x2019;s add a file.<br>Power off the VM.<br>Start the VM again. Where&#x2019;s the file?</p>
+</blockquote>
+<p><em>Note:</em> However, <em>saving</em> the VM will still persist the file, as the RAM contents are still perserved.</p>
+<h3 id="virtual-networking">Virtual Networking</h3>
+<p>Your VM would not be very useful if it does not have any way to connect to a network. There are four primary ways to virtualize the network:</p>
+<ul>
+<li><strong>Network Address Translation (NAT)</strong>
+<img src="https://raw.githubusercontent.com/CSC-DevOps/VM/master/imgs/VM-NAT.png" alt="VM-NAT">
+A NAT network provides a simple way for your VM to connect to external networks. Incoming network requests are translated by the virtualization software and routed to the appropriate VM.</li>
+</ul>
+<p>  Inside the VM, the network will appear as a private network.</p>
+<pre><code class="undefinedbash">nanobox:~# ifconfig
+eth0      Link encap:Ethernet  HWaddr 08:00:27:DE:D2:AD  
+          inet addr:10.0.2.15  Bcast:10.0.2.255  Mask:255.255.255.0
+          inet6 addr: fe80::a00:27ff:fede:d2ad/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1</code></pre>
+<p>   The address will not be addressable from the host machine.</p>
+<pre><code class="undefinedbash">$ ping 10.0.2.15
+PING 10.0.2.15 (10.0.2.15): 56 data bytes
+Request timeout for icmp_seq 0
+Request timeout for icmp_seq 1</code></pre>
+<ul>
+<li><p><strong>Bridged network</strong>
+ <img src="https://raw.githubusercontent.com/CSC-DevOps/VM/master/imgs/VM-bridged.png" alt="VM-Bridge">
+ A bridged network will share a host network interface, by filtering and routing network traffic belonging to the VM to a virtual network interface. In effect, your VM is on the same network as your host computer.</p>
+<p> On the host computer, you can see the following network.</p>
+<pre><code>$ ifconfig
+en0: flags=8863&lt;UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500 options=400&lt;CHANNEL_IO&gt;
+   inet6 fe80::4f:70a1:5a:8e6a%en0 prefixlen 64 secured scopeid 0x5 
+   inet 10.154.40.185 netmask 0xffffc000 broadcast 10.154.63.255</code></pre>
+<p> Inside the VM, it shares the same 10.154.x.x subnet as the host.</p>
+<pre><code class="undefinedbash">nanobox:~# ifconfig
+eth1      Link encap:Ethernet  HWaddr 08:00:27:EF:CE:8F  
+          inet addr:10.154.62.77  Bcast:10.154.63.255  Mask:255.255.192.0</code></pre>
+<p> A bridged network can be useful if you want to interact with your VM from your host or even other computers on your network.</p>
+</li>
+<li><p><strong>Internal network</strong></p>
+<p>An internal network allows multiple VMs on the same internal network to communicate; however, the network cannot be reached by the host. </p>
+</li>
+<li><p><strong>Host-Only network</strong></p>
+<p>A host-only network creates a local loopback network on the host machine. Hosts and VMs can then communicate on the host-only network.</p>
+<pre><code class="undefinedbash">$ ifconfig
+vboxnet24: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
+  ether 0a:00:27:00:00:18 
+  inet 172.30.25.1 netmask 0xffffff00 broadcast 172.30.25.255</code></pre>
+<p>Typically, VMs are statically assigned an IP address on the host-only network.</p>
+<p>One disadvantange of a host-only network is that it requires sudo/admin privilenges to create the host-only network on the host (the first time it is created).</p>
+</li>
+</ul>
+<p>Finally, another strategy to allow access to your VM without requiring additional network configuration on the host or VM is to use <em>port forwarding</em>, which is usually used in addition to NAT networking. For example, you can see this configuration setting in Networking =&gt; Adapter 1 =&gt; Advanced =&gt; Port Forwarding.</p>
+<p><img src="https://raw.githubusercontent.com/CSC-DevOps/VM/master/imgs/VM-portforward.png" alt="img"></p>
+<h3 id="how-bakerx-worked">How bakerx worked.</h3>
+<p>How did <code>bakerx</code> create the micro VM?</p>
+<p><code>bakerx</code> will first look for an available port for forwarding the ssh connection. It reads through other VMs in virtualbox and will exclude ports already used by machines (even dormant/powered off ones) as well as ports actively used on the host.</p>
+<pre><code>$ bakerx run alp3.9 alpine3.9-simple
+Creating alp3.9 using vbox...
+Searching between ports 2002 and 2999 for ssh on localhost for this vm.
+Excluding the following ports already used by VirtualBox VMS: 2002,2010,2003,2004,2005,2006,2007
+Port 2008 is available for ssh on localhost!</code></pre>
+<p>Then, the machine &#x201C;alp3.9&#x201D; is registered with VirtualBox, but not running or usable.</p>
+<pre><code>Executing VBoxManage createvm --name &quot;alp3.9&quot; --register</code></pre>
+<p>A simple storage device is added to the VM, like a hard drive. However, in this case, it is more like an optical drive (CD/DVD). This is like loading a CD with the <code>alpine3.9-simple</code> into a disk drive and booting a machine. Just how live distributions of linux work.</p>
+<pre><code>Executing VBoxManage storagectl &quot;alp3.9&quot; --name IDE --add ide
+Executing VBoxManage storageattach alp3.9 --storagectl IDE --port 0 --device 0 --type dvddrive --medium &quot;/Users/cjparnin/.bakerx/.persist/images/alpine3.9-simple/vbox.iso&quot;</code></pre>
+<p>Set the memory size and number of CPUs. Turn off the serial port, which can result in occasional boot errors.</p>
+<pre><code>Executing VBoxManage modifyvm &quot;alp3.9&quot; --memory 1024 --cpus 1
+Executing VBoxManage modifyvm alp3.9  --uart1 0x3f8 4 --uartmode1 disconnected</code></pre>
+<p>Create a network interface (eth0) configured with NAT networking.
+Create a network interface (eth1) configured with bridged networking with the wireless interface (en0) on the host machine. Finally, add a portforward [host:2008 =&gt; VM:22]. Note that the suffix of the commands correspond to which NIC is being addressed (e.g. <code>--natpf1</code> corresponds to the first NIC, and <code>--natpf2</code> corresponds to the second NIC).</p>
+<pre><code>Executing VBoxManage modifyvm alp3.9 --nic1 nat
+Executing VBoxManage modifyvm alp3.9 --nictype1 virtio
+Executing VBoxManage modifyvm alp3.9 --nic2 bridged --bridgeadapter2 &quot;en0&quot;
+Executing VBoxManage modifyvm alp3.9 --nictype2 virtio
+Executing VBoxManage modifyvm alp3.9 --natpf1 &quot;guestssh,tcp,,2008,,22&quot;</code></pre>
+<p>Stop any previous instances of the machine, then &#x201C;boot&#x201D; the virtual machine.</p>
+<pre><code>Executing VBoxManage startvm alp3.9 --type emergencystop
+Executing VBoxManage startvm alp3.9 --type headless</code></pre>
+<p>Wait for the VM to boot and for the sshd daemon to start listening on 22. A socket is opened and listens for data to be received from the ssh server:</p>
+<pre><code>&#x2838; Waiting for VM network to initialize... (can take a few seconds or minutes on slower hosts).data:  SSH-2.0-OpenSSH_7.9
+The VM is now ready. You can run this ssh command to connect to it.</code></pre>
+<p>Finally, a ssh connection is provided, using an identify file, and the port 2008, which will be forwarded the the VM&#x2019;s ssh port. <code>StrictHostKeyChecking=no</code> is also used because conflicting host signatures often exist when you create multiple VMs that use the same port number over time.</p>
+<pre><code>ssh -i /Users/cjparnin/.bakerx/baker_rsa root@127.0.0.1 -p 2008 -o StrictHostKeyChecking=no</code></pre>
+<h2 id="creating-an-up-script-for-a-repo">Creating an &#x201C;Up&#x201D; script for a repo.</h2>
+<p>Imagine you wanted to create a simple script that let you easily create a simple development environment for running a git repo.</p>
+<h3 id="example-script">Example script</h3>
+<p>Inside a bash terminal, create and run a script called <code>./up.sh</code>.</p>
+<pre><code class="undefinedbash">#!/bin/bash
+bakerx run app-vm alpine3.9-simple -b
+ssh_cmd=$(bakerx ssh-info app-vm)
+$ssh_cmd &lt;&lt; &apos;END_DOC&apos;
+
+apk add --update --no-cache nodejs npm git
+git clone https://github.com/CSC-DevOps/App
+cd App
+npm install
+ifconfig | grep &apos;eth1&apos; -A 1
+exit
+END_DOC
+
+echo $ssh_cmd</code></pre>
+<p>Running the script should initialize a new vm, called &#x201C;app-vm&#x201D; with a node.js environment. You should be able to ssh into the machine, and run <code>cd App; node main.js start 9000</code>.</p>
+<p>If you visit the bridged network address of your VM on port 9000, you should see the app running.</p>
+<p>&#x26A0;&#xFE0F; <em>Running in Git Bash</em>: The path <code>C:/Users/User/.bakerx/</code> is really <code>/c/Users/User/.bakerx</code>. Git Bash will map this for commands run in its shell. But when you run it as a script within the vanilla <code>/bin/bash</code> executable, when quoted, that mapping does not occur, and as a result, you cannot connect to your VM with the ssh command because no identify file can be found.</p>
+<p>A simple work around is to remove the quote using the <code>tr</code> command: <code>ssh_cmd=$(bakerx ssh-info app-vm -b | tr - d &apos;&quot;&apos;)</code></p>
+<h3 id="own-your-own">Own your own.</h3>
+<p>Create another version of the &#x201C;Up&#x201D; script (called <code>up-ubuntu.sh</code>) based on your <code>up.sh</code>; however, </p>
+<ul>
+<li><p>1) Running the code inside an ubuntu 18.04 instance.
+   Fetch an image with: <code>bakerx pull cloud-images.ubuntu.com bionic</code></p>
+</li>
+<li><p>2) Update the script to use ubuntu-based commands (e.g. <code>apt-get</code>)</p>
+</li>
+<li><p>3) Add a port forward from <code>localhost:8080</code> =&gt; <code>VM:9000</code>.</p>
+<p>   The following command can be used when the VM is running to add the port forward:</p>
+<pre><code>VBoxManage controlvm app-ubuntu natpf1 nodeport,tcp,,8080,,9000</code></pre>
+</li>
+</ul>
+<h3 id="extra-features">Extra features:</h3>
+<ul>
+<li><p><strong>Adding a bridge network in bionic</strong>. The default ubuntu image does not come with secondary NIC, so you will only have the NAT network on <code>enp0s3</code>.</p>
+<p>Update your script to copy the following to <code>/etc/netplan/52-bridge.yaml</code> on your VM.</p>
+<pre><code class="undefinedyaml">network:
+  ethernets:
+      enp0s8:
+          dhcp4: true
+  version: 2</code></pre>
+<p>Then run <code>sudo netplan apply</code>. Running <code>ifconfig</code> will show the updated network configuration.</p>
+</li>
+<li><p><strong>Reimplement your Up script to use VBoxManage</strong>. You can run the sequence of VBoxManage commands inside your script instead of running through <code>bakerx run</code>.</p>
+</li>
+<li><p><strong>Add sync folders</strong>. You can mount your host file system and use it within the VM. This can be very useful for editing files on your host computer (e.g. Code), but running your VM.</p>
+<p>This can be a bit complicated. <a href="https://github.com/ottomatica/node-virtualbox/blob/master/lib/VBoxProvider.js#L264">Example code here</a>.</p>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>If you followed most of these steps, you have essentially just built <a href="https://www.vagrantup.com/">vagrant</a>!</p>
+<pre><code class="undefinedbash">$ vagrant init hashicorp/bionic64
+
+$ vagrant up
+Bringing machine &apos;default&apos; up with &apos;virtualbox&apos; provider...
+==&gt; default: Importing base box &apos;hashicorp/bionic64&apos;...
+==&gt; default: Forwarding ports...
+default: 22 (guest) =&gt; 2222 (host) (adapter 1)
+==&gt; default: Waiting for machine to boot...
+
+$ vagrant ssh
+vagrant@bionic64:~$ _</code></pre>
+</article></div>
