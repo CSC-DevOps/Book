@@ -1,0 +1,106 @@
+<!DOCTYPE html><html><head><meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+         <meta content="utf-8" http-equiv="encoding"><style>
+      .markdown-body {
+          box-sizing: border-box;
+          min-width: 200px;
+          max-width: 980px;
+          margin: 0 auto;
+          padding: 45px;
+          border-style: dotted solid;
+      }
+  
+        @media (max-width: 767px) {
+          .markdown-body {
+              padding: 15px;
+          }
+          .sidebar {padding-top: 15px;}
+      }
+  
+      .markdown-body .warning {
+          border-style: solid;
+          background-color: rgba(255,10,0,.05);
+      }
+
+      .markdown-body pre
+      {
+        border-radius: 0.3rem;
+        border: solid 1px #dce6f0;
+      }
+
+      .main {
+        margin-left: 200px; /* Same as the width of the sidenav */
+        padding: 0px 10px;
+      }
+
+      /* The sidebar menu */
+      .sidebar {
+        height: 100%; /* Full-height: remove this if you want "auto" height */
+        width: 200px; /* Set the width of the sidebar */
+        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        background-color: #F2E9E4; 
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 20px;
+        padding-left: 10px;
+        color: #261C16;
+        border: 1px solid #D9D0C7;
+      }
+
+      /* The navigation menu links */
+      .sidebar a {
+        color: #261C16;
+        display: block;
+      }
+
+      /* When you mouse over the navigation links, change their color */
+      .sidebar a:hover {
+        color: #8C8480;
+      }
+
+      .markdown-body .footnote-ref {
+          padding-left:1px;
+      }
+
+      .markdown-body .footnote-ref a {
+        color: #261C16;
+        text-decoration: none;
+      }
+
+      </style>
+    <link rel="stylesheet" href="/Book/github-markdown.css"><link rel="stylesheet" href="/Book/github.css"></head></html><div class="sidebar">
+            <h3 id="home"><a href="/Book/">Home</a></h3>
+<h3 id="introduction">Introduction</h3>
+<ul>
+<li><a href="/Book/01-introduction/about.html">About this book</a></li>
+<li><a href="/Book/01-introduction/motivation.html">Motivation</a></li>
+<li><a href="/Book/01-introduction/history.html">History</a></li>
+<li><a href="/Book/01-introduction/README.html">Checking your local environment</a></li>
+</ul>
+<h3 id="engineering-basics">Engineering Basics</h3>
+<ul>
+<li><a href="/Book/02-basics/basicskills.html">Basic Skills</a></li>
+<li><a href="/Book/02-basics/Shells.html">Resources</a></li>
+</ul>
+<h3 id="computing-environments">Computing Environments</h3>
+<ul>
+<li><a href="/Book/03-environments/00-environments.html">Provisioning</a></li>
+<li><a href="/Book/03-environments/Environments.html">A philosophy: Be able to throw away your machine and still code</a></li>
+<li><a href="/Book/03-environments/README.html">REST Refresher</a></li>
+</ul>
+
+            </div><div class="main"><article class="markdown-body"><h2 id="motivation">Motivation</h2>
+<p>Perhaps, you&#x2019;ve tried to run a piece of code from someone else. How did that work out?</p>
+<p>Consider one homework assignment, where students used configuration management tools to install and configure an open-source chat server called <a href="https://mattermost.com/">Mattermost</a>, which works much like <a href="https://slack.com/">Slack</a>. The computing environment for Mattermost requires several components: a database, system dependencies, the Mattermost server itself, and several configuration files <code>systemd</code> services, <code>mysql.cnf</code>, and <code>config.json</code> for Mattermost). In configuring this environment, many things could go wrong. For example, a simple typo or malformed JSON in a configuration file could result in an non-functioning environment, but with little hints as to why. To diagnose this problem, students might need to check a variety of system components using a myriad of tools and shell utilities in which they have little experience, such as the <code>mysql</code> shell, <code>systemctl</code>, <code>journalctl</code>, <code>cat</code>, <code>grep</code>, and <code>jq</code>. In response, we would have to ask a series of questions: &#x201C;<em>did you check your mysql credentials</em>,&#x201D; &#x201C;<em>did you check your connection string is correct</em>,&#x201D; &#x201C;<em>did you run jsonlint on your configuration file</em>.&#x201D; Other times, strange behaviors would result from incidental factors, which we would only resolve after asking, &#x201C;<em>did you check dns</em>,&#x201D; &#x201C;<em>did you check your VM&#x2019;s memory size</em>.&#x201D; </p>
+<h3 id="summit">Summit?</h3>
+<p>Overall, this experience of asking students to perform various sanity checks eventually helped, but resulted in a frustrating and problematic learning environment for students.</p>
+<p>The Summit is attended by one representative from each invited company and facilitated by researchers.  Companies that have joined the Summit include: Cisco, Disney, Ericsson, Facebook, Google, IBM, LexisNexis, Mozilla, Netflix, Nortel, Red Hat, SAS, Slack, Twitter, VMWare, and 18F.  We will continue to invite a variety of companies that reflect different industries, products, and infrastructure needs. Indeed, the companies have ranged from having products that deploy changes to production infrastructure 4000 times per day to those who deploy once or twice per year. The companies represent a spectrum from continuous deployment pioneers with mature continuous deployment implementations to those with architectural baggage necessitating a multi-year transition to the use of continuous deployment practices. The factor that unites these companies is that all strive to leverage faster deployment to deliver higher quality products to their customers ever faster, using advanced analytics to translate a deluge of available telemetry data into an improved product. </p>
+<p>This work proposes a technique for automatically inferring and repairing specifications for computing environments.</p>
+<p>To inform our curriculum and help scrutinize and refine our instructional material, we will obtain industry feedback at the annual <em>Continuous Deployment Summit</em> </p>
+<p>co-organized five Continuous Deployment Summits, first starting in July 2015, hosted at Facebook, Netflix, Google, Microsoft, and Twitter. The purpose of the Summit is to share best practices and challenges in transitioning to the use of continuous deployment.   </p>
+<p>Each year, we will present our curriculum at the Summit to obtain the feedback of the attendees and to ensure our curriculum reflects technology advances.  After the summit, the attending researchers examine notes and synthesize the discussion into recommendations for students and professionals. Additionally, Summit discussions have been essential for enhancing lecture material. In the NCSU lectures, students have responded positively to receiving contextual information about practices from specific companies.</p>
+<p>Additionally, five Summit colleagues have agreed to do a more in-depth review of our curriculum and project progress. Letters of collaboration from these three colleagues appear in the supplementary documents:  Jason Cox (Disney); David McLaughlin (Twitter); John Micco (Google); Brendan Murphy (Microsoft); and Tony Savor (Facebook).</p>
+<p>Co-PI Parnin is one of the leading experts in developer operations (DevOps)<del>\cite{parnin2016top, me:agile:cd2015}, teaching one of the few courses in the world</del>\cite{Parnin:DevOps}. Parnin has co-organized three Continuous Deployment Summits over the past three years, hosted at Facebook and Google, where companies share industry practices and collaborate on tooling for configuration management and deployment. </p>
+<p>Co-PI Parnin is one of the leading experts in developer operations (DevOps)<del>\cite{parnin2016top, me:agile:cd2015}, teaching one of the few courses in the world</del>\cite{Parnin:DevOps}. Parnin has co-organized three Continuous Deployment Summits over the past three years, hosted at Facebook and Google, where companies share industry practices and collaborate on tooling for configuration management and deployment. </p>
+</article></div>

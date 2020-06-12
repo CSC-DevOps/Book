@@ -1,0 +1,106 @@
+<!DOCTYPE html><html><head><meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+         <meta content="utf-8" http-equiv="encoding"><style>
+      .markdown-body {
+          box-sizing: border-box;
+          min-width: 200px;
+          max-width: 980px;
+          margin: 0 auto;
+          padding: 45px;
+          border-style: dotted solid;
+      }
+  
+        @media (max-width: 767px) {
+          .markdown-body {
+              padding: 15px;
+          }
+          .sidebar {padding-top: 15px;}
+      }
+  
+      .markdown-body .warning {
+          border-style: solid;
+          background-color: rgba(255,10,0,.05);
+      }
+
+      .markdown-body pre
+      {
+        border-radius: 0.3rem;
+        border: solid 1px #dce6f0;
+      }
+
+      .main {
+        margin-left: 200px; /* Same as the width of the sidenav */
+        padding: 0px 10px;
+      }
+
+      /* The sidebar menu */
+      .sidebar {
+        height: 100%; /* Full-height: remove this if you want "auto" height */
+        width: 200px; /* Set the width of the sidebar */
+        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        background-color: #F2E9E4; 
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 20px;
+        padding-left: 10px;
+        color: #261C16;
+        border: 1px solid #D9D0C7;
+      }
+
+      /* The navigation menu links */
+      .sidebar a {
+        color: #261C16;
+        display: block;
+      }
+
+      /* When you mouse over the navigation links, change their color */
+      .sidebar a:hover {
+        color: #8C8480;
+      }
+
+      .markdown-body .footnote-ref {
+          padding-left:1px;
+      }
+
+      .markdown-body .footnote-ref a {
+        color: #261C16;
+        text-decoration: none;
+      }
+
+      </style>
+    <link rel="stylesheet" href="/Book/github-markdown.css"><link rel="stylesheet" href="/Book/github.css"></head></html><div class="sidebar">
+            <h3 id="home"><a href="/Book/">Home</a></h3>
+<h3 id="introduction">Introduction</h3>
+<ul>
+<li><a href="/Book/01-introduction/about.html">About this book</a></li>
+<li><a href="/Book/01-introduction/motivation.html">Motivation</a></li>
+<li><a href="/Book/01-introduction/history.html">History</a></li>
+<li><a href="/Book/01-introduction/README.html">Checking your local environment</a></li>
+</ul>
+<h3 id="engineering-basics">Engineering Basics</h3>
+<ul>
+<li><a href="/Book/02-basics/basicskills.html">Basic Skills</a></li>
+<li><a href="/Book/02-basics/Shells.html">Resources</a></li>
+</ul>
+<h3 id="computing-environments">Computing Environments</h3>
+<ul>
+<li><a href="/Book/03-environments/00-environments.html">Provisioning</a></li>
+<li><a href="/Book/03-environments/Environments.html">A philosophy: Be able to throw away your machine and still code</a></li>
+<li><a href="/Book/03-environments/README.html">REST Refresher</a></li>
+</ul>
+
+            </div><div class="main"><article class="markdown-body"><h1 id="introduction">Introduction</h1>
+<h2 id="about-this-book">About this book</h2>
+<p>Software developers no longer simply build software in isolation: They now are expected to continuously deploy fixes and experimental features to production environments serving millions of customers. Making such ultra-fast and automatic changes to production means that testing and verifying the design and implementation of computing environments is increasingly important. However, testing can be lacking<sup class="footnote-ref" id="marked-fnref:report"><a href="#marked-fn:report">[report]</a></sup>, and environment construction is easy to get wrong.
+For example, GitLab lost 300 GB of customer data after accidentally deleting their production database<sup class="footnote-ref" id="marked-fnref:gitlab"><a href="#marked-fn:gitlab">[gitlab]</a></sup>. Even worse, they could not restore the data because they discovered their backup procedure had been failing due to a mismatch in versions between the dump utility (<code>pg_dump 9.2</code>) and their database (<code>PostgreSQL 9.6</code>).</p>
+<p>Unfortunately, the skills required to construct and test these computing environments requires expertise and training that is even more rare and highly sought than data science skills<sup class="footnote-ref" id="marked-fnref:survey"><a href="#marked-fn:survey">[survey]</a></sup>. For example, Mozilla&#x2019;s Kim Moir says she &#x201C;recently looked at the undergrad classes required to graduate with a computer science degree from a major university, and [she] was struck by [a lack of] practice on deploying code. In most computer science programs, there is little emphasis on infrastructure&#x201D;. Similarly, Google&#x2019;s Boris Debic claims that &#x201C;Release engineering is not taught; it&#x2019;s often not even mentioned in courses where it should be mentioned&#x201D;. For this reason, Facebook&#x2019;s Chuck Rossi considers hiring engineers with these skills &#x201C;is like finding unicorns.&#x201D;<sup class="footnote-ref" id="marked-fnref:Adams:2015"><a href="#marked-fn:Adams:2015">[Adams:2015]</a></sup></p>
+<p>This book was born out of experiences teaching over 1000 university students, consulting with dozens of software development companies at the fore-front of continuous deployment, performing empirical research on software engineering, and conversations with software giants such as Kent Beck, Jez Humble, and Leigh Honeywell.
+You will have trouble finding the latest devops related tools, such as <code>helm</code>, <code>kubernetes</code>, and <code>kafta</code> in the book&#x2014;hopefully, because they have been replaced with something better by the time you are reading this. But what should remain are essential concepts needed to understand, apply, and even build these tools yourselves.</p>
+<p>Read on, and learn with me.</p>
+<h3 id="references">References</h3>
+<p class="footnote"><span id="marked-fn:report">report:</span> Based on the 2018 State of DevOps Report, only 36% of participants have capacity for dedicated testing of computing environments in their companies. <a href="#marked-fnref:report">&#x21A9;</a></p>
+<p class="footnote"><span id="marked-fn:survey">survey:</span> See the salary breakdown in the <a href="http://stackoverflow.com/insights/survey/2017#salary">Stack Overflow Survey</a>. <a href="#marked-fnref:survey">&#x21A9;</a></p>
+<p class="footnote"><span id="marked-fn:gitlab">gitlab:</span> Read Gitlab&#x2019;s <a href="https://about.gitlab.com/blog/2017/02/10/postmortem-of-database-outage-of-january-31/">Postmortem of database outage of January 31</a>. <a href="#marked-fnref:gitlab">&#x21A9;</a></p>
+<p class="footnote"><span id="marked-fn:Adams:2015">Adams:2015:</span> The practice and future of release engineering: a roundtable with three release engineers. IEEE Software 32(2), 42&#x2013;49 (2015). <a href="https://doi.org/10.1109/MS.2015.52">https://doi.org/10.1109/MS.2015.52</a> <a href="#marked-fnref:Adams:2015">&#x21A9;</a></p>
+</article></div>
