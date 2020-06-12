@@ -1,0 +1,173 @@
+<!DOCTYPE html><html><head><meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+         <meta content="utf-8" http-equiv="encoding"><style>
+      .markdown-body {
+          box-sizing: border-box;
+          min-width: 200px;
+          max-width: 980px;
+          margin: 0 auto;
+          padding: 45px;
+          border-style: dotted solid;
+      }
+  
+        @media (max-width: 767px) {
+          .markdown-body {
+              padding: 15px;
+          }
+          .sidebar {padding-top: 15px;}
+      }
+  
+      .markdown-body .warning {
+          border-style: solid;
+          background-color: rgba(255,10,0,.05);
+      }
+
+      .markdown-body .todo {
+        border-style: solid;
+        background-color: rgba(255,10,0,.05);
+      }
+
+
+      .markdown-body pre
+      {
+        border-radius: 0.3rem;
+        border: solid 1px #dce6f0;
+      }
+
+      .main {
+        margin-left: 200px; /* Same as the width of the sidenav */
+        padding: 0px 10px;
+      }
+
+      /* The sidebar menu */
+      .sidebar {
+        height: 100%; /* Full-height: remove this if you want "auto" height */
+        width: 200px; /* Set the width of the sidebar */
+        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        background-color: #F2E9E4; 
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 20px;
+        padding-left: 10px;
+        color: #261C16;
+        border: 1px solid #D9D0C7;
+      }
+
+      /* The navigation menu links */
+      .sidebar a {
+        color: #261C16;
+        display: block;
+      }
+
+      /* When you mouse over the navigation links, change their color */
+      .sidebar a:hover {
+        color: #8C8480;
+      }
+
+      .markdown-body .footnote-ref {
+          padding-left:1px;
+      }
+
+      .markdown-body .footnote-ref a {
+        color: #261C16;
+        text-decoration: none;
+      }
+
+      </style>
+    <link rel="stylesheet" href="/Book/github-markdown.css"><link rel="stylesheet" href="/Book/github.css"></head></html><div class="sidebar">
+            <h3 id="home"><a href="/Book/">Home</a></h3>
+<h3 id="introduction">Introduction</h3>
+<ul>
+<li><a href="/Book/01-introduction/about.html">About this book</a></li>
+<li><a href="/Book/01-introduction/motivation.html">Motivation</a></li>
+<li><a href="/Book/01-introduction/bigideas.html">Big Ideas</a></li>
+</ul>
+<h3 id="engineering-basics">Engineering Basics</h3>
+<ul>
+<li><a href="/Book/02-basics/basicskills.html">Basic Skills</a></li>
+<li><a href="/Book/02-basics/Shells.html">Resources</a></li>
+<li><a href="/Book/02-basics/Setup.html">An installation philosophy</a></li>
+<li><a href="/Book/02-basics/README.html">Checking your local environment</a></li>
+</ul>
+<h3 id="computing-environments">Computing Environments</h3>
+<ul>
+<li><a href="/Book/03-environments/00-environments.html">Provisioning</a></li>
+<li><a href="/Book/03-environments/Environments.html">A philosophy: Be able to throw away your machine and still code</a></li>
+<li><a href="/Book/03-environments/README.html">REST Refresher</a></li>
+</ul>
+
+            </div><div class="main"><article class="markdown-body"><p><a href="Setup.md#setup">Setup</a> | <a href="Shells.md#shells">Shells</a> |  <a href="Git.md#git">Git</a> | <a href="MarkdownEditors.md#markdown">Markdown and IDEs</a> |  <a href="Environments.md#environments">Virtual Environments</a> | <a href="OnlineTools.md#online-tools">Task Management</a></p>
+<h1 id="setup">Setup</h1>
+<p>To successfully build software, you need a properly configured environment with a variety of tools. To help us get started, we will we install some tools, package managers, that make it a little easier to configure systems. </p>
+<p>Whether you&#x2019;re a Mac, Windows, or Linux user&#x2014;you should be able to find a way to be productive with the tools from this workshop. However, there may be specific tweaks, issues, and accomodatations you may have to make based on your platform.</p>
+<h2 id="an-installation-philosophy">An installation philosophy</h2>
+<blockquote>
+<p><em>Avoid manual installation, automate with package managers!</em></p>
+</blockquote>
+<p>When possible, using a package manager can allow you to automate and streamline the installation of tools. Instead of hunting down the right website, finding the right version and dowload link, then clicking through an installation wizard&#x2014;you let the package manager take care of all those manual steps for you! </p>
+<p><em>Tip</em>: Later on, the ability to automate the installation of software environments becomes important in later stages of software development, such as continuous integration, or deployment.</p>
+<h3 id="package-managers">Package Managers</h3>
+<p><em>Package managers</em> are tools for installing libraries and tools, which help manage dependencies and configuration of files and environment variables. </p>
+<p>There are generally two flavors of package managers. <em>Binary</em> package managers typically install platform specific dependencies, whereas, <em>source</em> package managers typically install libraries you can use in your code.</p>
+<ul>
+<li><strong>Binary</strong>: brew, choco, apt-get  </li>
+<li><strong>Source</strong>: npm, pip, maven</li>
+</ul>
+<h3 id="installing-package-managers">Installing Package Managers</h3>
+<p>If you&#x2019;re using Linux, you typically already have a package manager, such as <code>yum</code> or <code>apt-get</code>. You can skip this step.</p>
+<h5 id="installing-homebrew-on-mac-os-x">Installing HomeBrew on Mac OS X</h5>
+<p>Homebrew is a popular package manager for MacOS. To install, open a terminal window and run the install command shown on <a href="http://brew.sh/">http://brew.sh/</a>.</p>
+<p>Here is an example of how to install the utility <code>wget</code>.</p>
+<pre><code class="language-bash">brew install wget</code></pre>
+<h5 id="installing-chocolatey-on-windows">Installing Chocolatey on Windows</h5>
+<p>Chocolatey is a package manager for Windows. </p>
+<p>Follow the instructions on the <a href="https://chocolatey.org/install">Chocolatey website</a> to install. 
+Once Chocolatey is installed, you can use it to install other tools on your system using <code>choco install &lt;package-name&gt;</code>.  Look for the package name on the Chocolatey website.</p>
+<p>Here are some example commands</p>
+<pre><code>choco install wget</code></pre>
+<h2 id="practice-installing-useful-software">Practice: Installing useful software</h2>
+<p>See if you can find the packages for these tools with your package manager and install them (if you do not already have them).</p>
+<ul>
+<li>git</li>
+<li>node.js</li>
+<li>python2</li>
+</ul>
+<h2 id="optional-make-windows-just-as-awesome">Optional: Make Windows Just as Awesome</h2>
+<p>If you have <strong>Windows 10</strong>, you can use the <a href="https://docs.microsoft.com/en-us/windows/wsl/about">Windows Subsystem for Linux</a>!  Follow the <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">Windows 10 Installation Guide</a>.</p>
+<p><em>Tip</em>: You can also get many of the same commands available in your windows shell environment by installing git and ensuring they exist on your path.</p>
+<ul>
+<li>Update your System Environment Variables Path to include: <code>C:\Program Files\Git\usr\bin</code>. </li>
+<li>Restart your shell and many unix commands will work in windows too!</li>
+</ul>
+<p>You can install even more unix utilities:</p>
+<ul>
+<li>Install gnuwin basic utils for windows: <code>choco install gnuwin32-coreutils.install</code></li>
+<li>Update your System Environment Variables Path: <code>C:\Program Files (x86)\GnuWin32\bin</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/chrisparnin/EngineeringBasics/master/resources/imgs/win-env.jpg" alt="Windows-EnvironmentVariables"></p>
+<h2 id="opunit">opunit</h2>
+<p><a href="https://github.com/ottomatica/opunit">opunit</a> is a simple tool for verifying the configuration of a machine, including your laptop and or any virtual machines you may have created.</p>
+<p>By running opunit, you&#x2019;ll be able to verify your machine is correctly setup for a course, workshop, or homework assignment. </p>
+<p>In the simpliest case, opunit can check if you have the right versions of software installed. Beyond these simple checks, opunit can also verify the correct configuration of software and services that you&#x2019;ll be automating later in the course.</p>
+<h3 id="installing-opunit">Installing opunit</h3>
+<p>opunit requires <a href="https://nodejs.org/en/">node.js</a> to be installed.</p>
+<p>You can then install using npm:</p>
+<pre><code class="language-bash">npm install ottomatica/opunit -g</code></pre>
+<h3 id="checking-your-local-machine">Checking your local machine</h3>
+<p>You can check your local machine against a course profile, but running the following command:</p>
+<pre><code class="language-bash">opunit profile CSC-DevOps/profile:510.yml</code></pre>
+<p>The resulting output might look something like this image below. The green check &#x2714;&#xFE0F; indicates that a check was passed, while the red x &#x274C; indicates that a check failed.</p>
+<p>For example, the first check will validate whether the version of node.js satisties the semver requirement of being at least <code>^10.x.x</code> or greater.</p>
+<p>Notice that one of the checks under &#x201C;Editor Support&#x201D;, fails to validate. This check looks for syntax highlighting being enabled for vim. This check fails because the .vimrc file is not presence on system.</p>
+<p>If you have any questions about why a check fails or passes on your system, reach out to a TA or instructor.</p>
+<p><img src="https://raw.githubusercontent.com/chrisparnin/EngineeringBasics/master/resources/imgs/profile.png" alt="profile"></p>
+<h3 id="running-opunit-for-a-workshopassignment">Running opunit for a workshop/assignment</h3>
+<p>You run opunit against a local profile, which is useful when working on an assignment or workshop.</p>
+<p>For example, if you are working on the <a href="https://github.com/CSC-DevOps/Pipelines">Pipelines workshop</a>, you can run opunit against the profile located in test/opunit.yml</p>
+<pre><code class="language-bash">opunit verify local</code></pre>
+<p>This will check whether you have correctly setup your pipeline for the workshop. Before doing anything, it would be expected for most checks to fail. As you complete more steps from the workshop, more checks should pass!</p>
+<h3 id="running-opunit-against-a-virtual-machine">Running opunit against a virtual machine</h3>
+<p>opunit can be run against a virtual machine, both locally on your machine, as well as remote virtual machines created on platforms such as AWS or digital ocean.</p>
+<p>Further instructions will be provided when we get to this step.</p>
+</article></div>
