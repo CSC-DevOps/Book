@@ -59,230 +59,128 @@
         color: #8C8480;
       }
 
-      .markdown-body .footnote-ref {
-          padding-left:1px;
-      }
-
-      .markdown-body .footnote-ref a {
-        color: #261C16;
-        text-decoration: none;
-      }
-
       </style>
     <link rel="stylesheet" href="/Book/github-markdown.css"><link rel="stylesheet" href="/Book/github.css"></head></html><div class="sidebar">
             <h3 id="home"><a href="/Book/">Home</a></h3>
 <h3 id="introduction">Introduction</h3>
 <ul>
-<li><a href="/Book/01-introduction/about.html">About this book</a></li>
-<li><a href="/Book/01-introduction/motivation.html">Motivation</a></li>
-<li><a href="/Book/01-introduction/bigideas.html">Big Ideas</a></li>
+<li><a href="/Book/01-introduction/introduction.html">About this book</a></li>
+<li><a href="/Book/01-introduction/concepts.html">Motivation</a></li>
+<li><a href="/Book/01-introduction/README.html">Checking your local environment</a></li>
 </ul>
 <h3 id="engineering-basics">Engineering Basics</h3>
 <ul>
 <li><a href="/Book/02-basics/basicskills.html">Basic Skills</a></li>
 <li><a href="/Book/02-basics/Shells.html">Resources</a></li>
-<li><a href="/Book/02-basics/Setup.html">An installation philosophy</a></li>
-<li><a href="/Book/02-basics/Environments.html">A philosophy: Be able to throw away your machine and still code</a></li>
-<li><a href="/Book/02-basics/README.html">Checking your local environment</a></li>
 </ul>
 <h3 id="computing-environments">Computing Environments</h3>
 <ul>
-<li><a href="/Book/03-environments/virtualization.html">Virtualization</a></li>
-<li><a href="/Book/03-environments/README.html">Preqs</a></li>
+<li><a href="/Book/03-environments/00-environments.html">Provisioning</a></li>
+<li><a href="/Book/03-environments/Environments.html">A philosophy: Be able to throw away your machine and still code</a></li>
 <li><a href="/Book/03-environments/README.html">REST Refresher</a></li>
-<li><a href="/Book/03-environments/README.html">Setup</a></li>
-</ul>
-<h3 id="configuration-management">Configuration Management</h3>
-<ul>
-<li><a href="/Book/04-configuration/configure.html">Configure</a></li>
 </ul>
 
-            </div><div class="main"><article class="markdown-body"><h1 id="containers">Containers</h1>
-<h2 id="setup">Setup</h2>
-<h3 id="preqs">Preqs</h3>
-<ul>
-<li>Ensure you have <code>node --version &gt;= 12.14</code>.</li>
-<li>Ensure you have <code>bakerx --version &gt;= 0.6.3</code>.</li>
-<li>Ensure you have VirtualBox installed.</li>
-</ul>
-<h2 id="creating-a-simple-container-with-chroot">Creating a simple container with chroot</h2>
-<h3 id="create-a-headless-micro-vm-with-bakerx">Create a headless micro VM with bakerx</h3>
-<p>Pull an 3.9 alpine image and create a micro VM called, <code>con0</code>.</p>
-<pre><code class="undefinedbash">bakerx pull ottomatica/slim#images alpine3.9-simple
+            </div><div class="main"><article class="markdown-body"><h1 id="provison-workshop">Provison Workshop</h1>
+<p>You must get into pairs.  And there is a <em>twist</em>.</p>
+<h3 id="before-you-start">Before you start</h3>
+<p><code>git clone https://github.com/CSC-DevOps/Provision</code></p>
+<h5 id="using-package-manager-install-dependencies">Using package manager, install dependencies</h5>
+<p><code>cd Provision</code> then <code>npm install</code></p>
+<h5 id="set-your-token">Set your token</h5>
+<pre><code># Mac/Linux
+export NCSU_DOTOKEN=&quot;xxx&quot;
+# Windows
+setx NCSU_DOTOKEN xxx</code></pre>
+<h5 id="run-the-node-program">Run the node program</h5>
+<p><code>node index.js</code></p>
+<p>If everything is set correctly, you should see output like the following:</p>
+<pre><code>Your token is: xxxxxx
+Calls remaining 4931</code></pre>
+<h2 id="rest-refresher">REST Refresher</h2>
+<p>A very brief overview on REST APIs:</p>
+<p>A <em>RESTful architecture</em>, is an architectural style (<a href="https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm">Fielding</a>) for providing resources to clients using a set of request verbs and resource locations. A REST API allows a client to access resources provided by a service.</p>
+<p>A useful <a href="https://raw.githubusercontent.com/CSC-510/REST">workshop on using the GitHub REST APIs</a> can be done for more practice.</p>
+<h3 id="concepts">Concepts</h3>
+<p>The goal of REST APIs is to provide painless communication and interoperability between applications and services. REST APIs typically allow (often with some sort of authentication) a manipulation of the various types of entities associated with a service.</p>
+<p>For example, if an API was created to enable an application to get information about user accounts, create new ones, update them, or delete them, the REST API could simply be defined by combining the following HTTP VERBS (GET, POST, PUT, DELETE), with resource paths, such as /users/.</p>
+<table>
+<thead>
+<tr>
+<th>HTTP Verb</th>
+<th>Action</th>
+<th>Example</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td>Retrieve record(s)</td>
+<td>GET /users/</td>
+<td>Retrieves all users</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>Create record</td>
+<td>POST /users/</td>
+<td>Creates a new user</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>Update record</td>
+<td>PUT /users/6</td>
+<td>Updates user 6</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>Delete record(s)</td>
+<td>DELETE /users/1</td>
+<td>Deletes user with id 1</td>
+</tr>
+</tbody></table>
+<p>Query parameters can be provided to provide additional information to the request. For example, <code>GET /users?country=France</code> would return a list of all users in France.</p>
+<p>A <a href="https://www.tutorialspoint.com/http/http_message_examples.htm">response</a> typically is composed of several parts: including headers, status code, and body.</p>
+<p>Headers will may useful information, such as rate-limits quotas, or properties of the response, such as whether it is encoded or compressed in a particular format.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes">status code</a> will allow you to verify the success of an operation or indicate different types of failures. Additional error information may be sent via the request body.</p>
+<p>The body will typically contain a JSON-formated object or an array. Some actions, such as deleting an object, may not return any data in the response body.</p>
+<p>When sending a request, a JSON-formatted object is sent attached via the request body to the server.</p>
+<h3 id="http">HTTP</h3>
+<p><img src="https://github.com/CSC-510/REST/blob/master/img/http.png?raw=true" alt="http"></p>
+<h2 id="practicting-with-a-rest-client">Practicting with a REST Client</h2>
+<p>Let&#x2019;s see how a javascript client application can communicate with a server using a REST API call.</p>
+<h3 id="sending-a-get-request-from-inside-the-browser">Sending a GET request from inside the browser</h3>
+<p>In a browser, visit <a href="http://httpbin.org/">http://httpbin.org/</a></p>
+<p>Open the developer&#x2019;s tool console (in your Web browser) and execute this code inside of the console.</p>
+<p><em>Note:</em> If you try this same code from a different page, you&#x2019;ll get a Cross-Origin Resource Sharing (CORS) error.</p>
+<pre><code class="language-Javascript">fetch(<span class="hljs-string">&quot;https://httpbin.org/anything&quot;</span>)
+    .then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> data.json())
+    .then(<span class="hljs-function"><span class="hljs-params">result</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(result));</code></pre>
+<p>This constructs as simple <code>GET</code> request to <code>https://httpbin.org/anything</code> and returns a copy of what was sent.</p>
+<h3 id="sending-request-using-curl">Sending request using curl</h3>
+<p>Here are the same examples as above, but written to work with curl:</p>
+<pre><code class="language-bash">curl --request GET https://httpbin.org/anything</code></pre>
+<pre><code class="language-bash">curl --request PUT -H &quot;Content-Type: application/json&quot; --data &apos;{&quot;coffee&quot;:1,&quot;milk&quot;:1,&quot;sugar&quot;:1,&quot;chocolate&quot;:1}&apos; https://httpbin.org/anything</code></pre>
+<h2 id="workshop">Workshop</h2>
+<p>You will be experimenting with code for provisioning a new server from a cloud provider at a particular region, that is initialized with a specified virtual machine image, using the <a href="https://developers.digitalocean.com/v2/">digitalocean api v2</a>.</p>
+<p>The code makes use of the <a href="https://github.com/sindresorhus/got#readme">got api</a> for making http requests, suitable for interacting with a REST API.</p>
+<p>Complete the remaining 7 steps specified in the code comments of <a href="index.js"><code>index.js</code></a>.</p>
+<ol>
+<li>List regions.</li>
+<li>List VM images.</li>
+<li>Create droplet.</li>
+<li>Get droplet ip</li>
+<li>Ping ip</li>
+<li>Destroy droplet</li>
+<li>Ping ip, make sure dead.</li>
+</ol>
+<p>You can use <code>curl</code> to help debug your calls:</p>
+<pre><code class="language-bash">curl -X GET -H &apos;Content-Type: application/json&apos; -H &quot;Authorization: Bearer $NCSU_DOTOKEN&quot; &quot;https://api.digitalocean.com/v2/images&quot;</code></pre>
+<p><em>Note: For Windows, use <code>%NCSU_DOTOKEN%</code> in your curl command to expand the environment variable.</em></p>
+<p><strong>Bonus</strong>: The first 3 pairs to finish workshop will receive 1 bonus point on their final workshop/class activities. <em>But</em>, if the rate-limit hits 0, everyone will loose 1 point on their workshop final grade. </p>
+<img src="https://cloud.githubusercontent.com/assets/742934/9525410/ff96de96-4cb1-11e5-84af-19b70cbae957.png" alt="Saw" width="500px;">
 
-bakerx run con0 alpine3.9-simple</code></pre>
-<h3 id="prepare-a-simple-rootfs-with-busybox">Prepare a simple rootfs with busybox.</h3>
-<pre><code class="undefinedbash">mkdir -p rootfs/bin rootfs/sbin rootfs/usr/bin rootfs/usr/sbin
 
-wget https://www.busybox.net/downloads/binaries/1.31.0-defconfig-multiarch-musl/busybox-i686 -O rootfs/bin/busybox
-chmod +x rootfs/bin/busybox</code></pre>
-<p>Install symlinks inside the rootfs</p>
-<pre><code class="undefinedbash">chroot rootfs /bin/busybox --install -s</code></pre>
-<h3 id="playing-with-container">Playing with container</h3>
-<p>Let&#x2019;s try it out!</p>
-<pre><code class="undefinedbash">PS1=&quot;C-$ &quot; chroot rootfs /bin/busybox sh
-C-$ touch HELLO.txt
-C-$ ls
-C-$ exit</code></pre>
-<p>There is a minor problem. We have not perserved the isolation property for our filesystem, as the filesystem is still mutable.</p>
-<p>You can see new file exists in the file system, and worse, we can delete and mess up things.</p>
-<pre><code class="undefinedbash">PS1=&quot;C-$ &quot; chroot rootfs /bin/busybox sh
-ls
-rm HELLO.txt</code></pre>
-<h3 id="introducing-overlay-filesystem">Introducing overlay filesystem</h3>
-<p>Create a new <a href="container.sh">container.sh</a> file inside your micro VM and make it exectuable.
-This script will create a new snapshot of the filesystem everytime is it launched in order to run the container.</p>
-<pre><code class="undefinedbash">#!/bin/ash
 
-# Expect rootfs as script argument
-ROOTFS=$1
 
-# Create a random unique string
-nonce=$(&lt;/dev/urandom tr -dc A-Za-z0-9-_ | head -c 10)
 
-# Prepare our filesystem for our container.
-mkdir -p /tmp/$nonce/upper /tmp/$nonce/workdir /tmp/$nonce/overlay
-# Create an overlay filesystem based on our read-only root filesystem.
-mount -t overlay -o lowerdir=$ROOTFS,upperdir=/tmp/$nonce/upper,workdir=/tmp/$nonce/workdir none /tmp/$nonce/overlay
 
-# Create symlinks in our container for convience.
-chroot /tmp/$nonce/overlay/ /bin/busybox --install -s
-
-# Launch container with custom prompt in ash shell.
-PS1=&quot;$nonce-# &quot; chroot /tmp/$nonce/overlay /bin/busybox sh</code></pre>
-<p>Using the overlay filesystem, we can keep our rootfs &#x201C;read-only&#x201D;, while allowing new changes to be made. The read-only portion is denotated by the &#x201C;lower&#x201D; directory. The change states are maintained in the &#x201C;upper&#x201D; and &#x201C;work&#x201D; directories, and the merged/unified filesystem is available in the &#x201C;overlay&#x201D; directory.</p>
-<p>A short demo of the script illustrates our ability to perserve the rootfs each time we create a new container.</p>
-<p align="center">
-<img src="https://raw.githubusercontent.com/CSC-DevOps/Containers/master/imgs/simple-chroot.png" alt="demo" height="250">
-</p>
-
-<h3 id="summary">Summary</h3>
-<p>While we have demonstrated a very simple way to implement containers&#x2014;however, there are several limitations with our implementation.</p>
-<ul>
-<li><p>Preparing root file systems can be problematic. Can we do better than random wget scripts?</p>
-</li>
-<li><p>Keeping multiple root filesystems can be inefficient &#x2014; We are not taking advantage of common shared files.</p>
-</li>
-<li><p>Other devices of the host OS are not isolated, such as networking.</p>
-</li>
-<li><p>We may want to share and isolate other resources with the host. For example, if we mount the proc filesystem, we can kill any process on the system. Not good! A rogue container could interfere with other containers or bring down the whole system.</p>
-<pre><code class="undefinedbash">mkdir -p /tmp/$nonce/overlay/proc
-mount -t proc none /tmp/$nonce/overlay/proc</code></pre>
-</li>
-</ul>
-<h2 id="introducing-docker-containers">Introducing Docker containers.</h2>
-<p>If we worked on our script for several more years and took advantage of other capabilities of the Linux kernel, such as cgroups and namespaces, we could overcome many of the limitations we saw with our homegrown containers. Thankfully, someone has done this work for us.</p>
-<h3 id="setup-1">Setup</h3>
-<h4 id="create-a-headless-micro-vm-with-bakerx-1">Create a headless micro VM with bakerx</h4>
-<p>Pull an ubuntu bionic image and create a micro VM called, <code>docker0</code>.</p>
-<pre><code class="undefinedbash">bakerx pull cloud-images.ubuntu.com bionic
-bakerx run docker0 bionic</code></pre>
-<h4 id="install-docker-inside-your-vm">Install docker inside your VM.</h4>
-<p>The recommended method for installing docker on ubuntu can be <a href="https://docs.docker.com/install/linux/docker-ee/ubuntu/#install-docker-ee-1">found here</a>.  But in the interest of time: :grimacing:</p>
-<pre><code>curl -sSL https://get.docker.com/ | sh</code></pre>
-<p>After installation, it is recommended you allow docker to be run without needing sudo. <strong>IMPORTANT</strong> You&#x2019;d need to restart your shell (exit and log back in) to see the changes reflected.</p>
-<pre><code>sudo usermod -aG docker $(whoami)</code></pre>
-<p>Verify you can run docker:</p>
-<pre><code>docker run hello-world</code></pre>
-<h3 id="playing-with-docker">Playing with Docker</h3>
-<p>Pull an ubuntu image.</p>
-<pre><code>$ docker pull ubuntu:18.04</code></pre>
-<p>Check the size of the images.</p>
-<pre><code class="undefinedbash">$ docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-ubuntu              18.04               ccc6e87d482b        6 days ago          64.2MB
-hello-world         latest              fce289e99eb9        12 months ago       1.84kB</code></pre>
-<p>Let&#x2019;s create a simple container.</p>
-<pre><code class="undefinedbash">docker run ubuntu:18.04 sh</code></pre>
-<p>Unfortunately, that doesn&#x2019;t quite do what we want, because a pseudo-tty allocated to the container, so we can use the terminal.</p>
-<pre><code>$ docker run -t ubuntu:18.04 sh
-# ls
-
-exit
-.exit
-^C</code></pre>
-<p>Unfortunately, that&#x2019;s still not enough. Docker isn&#x2019;t necessarily the most intuitive system, you see. You also need to allow input (<code>-i</code> Keep STDIN open even if not attached).</p>
-<pre><code>$ docker run -it ubuntu:18.04 sh</code></pre>
-<p>Finally, we can get to a terminal, and see we can run shell commands in our own private snapshot of the ubuntu image.</p>
-<pre><code class="undefinedbash">$ docker run -it ubuntu:18.04 sh
-# ls
-# rm -rf --no-preserve-root /
-# exit</code></pre>
-<p>Oh no, what have we done? Is everything okay?</p>
-<pre><code class="undefinedbash">$ docker run -it ubuntu:18.04 sh</code></pre>
-<h3 id="building-images">Building Images</h3>
-<p>We can create our own images.
-Create a &#x201C;Dockerfile&#x201D; and place this content inside:</p>
-<pre><code>FROM ubuntu:18.04
-
-RUN apt-get -y update
-
-# update packages and install
-RUN apt-get install -y openjdk-11-jre-headless wget curl unzip
-
-RUN apt-get -y install git
-RUN apt-get -y install maven
-
-ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64</code></pre>
-<p>Build the docker image, and name it &#x201C;java11&#x201D;.</p>
-<pre><code class="undefinedbash">docker build -t java11 .</code></pre>
-<p>We can see our image listed, now:</p>
-<pre><code class="undefinedbash">docker images</code></pre>
-<p>Now, let&#x2019;s use it to run <code>mvn</code> to check our environment setup.</p>
-<pre><code class="undefinedbash">docker run java11 mvn --version</code></pre>
-<h3 id="understanding-containers">Understanding containers</h3>
-<p>Look at all the containers you&#x2019;ve created by running commands above.</p>
-<pre><code>docker ps -a </code></pre>
-<p>The container &#x201C;graveyard&#x201D; contains all the dead containers that ran a process, then exited.
-If we want a container to stick around, we need it to run in daemon mode, but adding the <code>-d</code> arg. We also provide a name for easy reference.</p>
-<pre><code>docker run --name test-d -it -d ubuntu:18.04</code></pre>
-<p>Let&#x2019;s use an one-liner to write a file to our running container.</p>
-<pre><code class="undefinedbash">docker exec -it test-d script /dev/null -c &quot;echo &apos;Hello&apos; &gt; foo.txt&quot;</code></pre>
-<p>Make sure we can see change. Note we add <code>-t</code> to improve the output of <code>ls</code>:</p>
-<pre><code class="undefinedbash">docker exec -t test-d ls</code></pre>
-<p>Now, let&#x2019;s commit this to our image. Any new container will now have &#x2018;foo.txt&#x2019; inside it.</p>
-<pre><code class="undefinedbash">docker commit test-d ubuntu:18.04</code></pre>
-<p>We can confirm that new containers do indeed have &#x2018;foo.txt&#x2019; inside:</p>
-<pre><code class="undefinedbash">$ docker run -t ubuntu:18.04 ls
-bin   dev  foo.txt  lib    media  opt    root  sbin  sys  usr
-boot  etc  home     lib64  mnt      proc    run   srv   tmp  var</code></pre>
-<h3 id="volumes">Volumes</h3>
-<p>Imagine you wanted to create a simple build script and run against an image. It could be incredible tedious to create a new image per project, just to add the build script. Furthermore, getting data <em>out</em> of a container could be unwieldy. Alternatively, we can use volumes, to share our filesystem of our host with a container.</p>
-<pre><code>docker run -v /home/vagrant/:/vol java11 ls -a /vol/</code></pre>
-<p>We should be able to see our host&#x2019;s directory home directory. Now, we can have a simple &#x201C;escape hatch&#x201D; to get data in and out of the container at the cost of losing true immutability. </p>
-<h3 id="build-script-demo">Build script demo</h3>
-<p>In your host VM, create &#x2018;build.sh&#x2019; and place the following inside:</p>
-<pre><code class="undefinedbash">git clone https://github.com/CSC-326/JSPDemo
-cd JSPDemo
-mvn compile -DskipTests -Dmaven.javadoc.skip=true</code></pre>
-<pre><code>chmod +x build.sh
-docker run -v /home/vagrant/:/vol java11 sh -c /vol/build.sh</code></pre>
-<p>We can confirm the code is greatly out of date and does not work with Java 11!</p>
-<pre><code>[INFO] 31 errors 
-[INFO] -------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  29.052 s
-[INFO] Finished at: 2020-01-22T22:06:57Z
-[INFO] ------------------------------------------------------------------------</code></pre>
-<h3 id="reviewing-principles">Reviewing principles</h3>
-<p>Recall we want to maintain efficiency and isolation. Here is how Docker enables this.</p>
-<p><img src="https://raw.githubusercontent.com/CSC-DevOps/Containers/master/imgs/docker-vs-vm.png" alt="docker-vs-vm"></p>
-<h5 id="images">Images</h5>
-<ul>
-<li>A docker image contains a set of layers, which can be composed for efficient storage on the system.</li>
-<li>An image can be based on other images (<code>FROM ubuntu:18.04</code>).</li>
-<li>You can build your own images by running commands inside a Dockerfile. </li>
-<li>A base image is usually created with hand-crafted rootfs (<code>FROM scratch</code> &#x2026; <code>COPY /rootfs /</code>).</li>
-<li>More advanced ways to build images, include using the <a href="https://matthiasnoback.nl/2017/04/docker-build-patterns/">Builder pattern</a>, for multi-staged builds.</li>
-</ul>
-<h5 id="containers-1">Containers</h5>
-<ul>
-<li>A container contains an overlay of the image&#x2019;s rootfs.</li>
-<li>Containers are generally stateless, that is any change to a container has no effect on its image; however, you can commit a change to a new image.</li>
-<li>A docker container only stays alive as long as there is an active process being run in it. You can keep a long running container by running a process that does not exist (a server), or running in daemon mode (<code>-d</code>).</li>
-<li>A container cannot generally access other processes, the host filesystem, or other resources. The entry point is PID 1. </li>
-<li>While greatly useful, running programs inside containers can result in many different quirky behavior.</li>
-</ul>
 </article></div>
